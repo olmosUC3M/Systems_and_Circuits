@@ -1,0 +1,1210 @@
+\documentclass[10pt,makeidx]{beamer}
+
+\mode<presentation>
+{
+ \usetheme{Boadilla}
+\pagestyle{empty}
+
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamerfont*{block}{size=\normalsize,series=\bfseries}
+%\setbeamertemplate{blocks}[rounded][shadow=true]
+}
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+
+\usepackage{etex}
+% \usepackage{helvet}
+\usepackage{amsmath, amssymb}
+\usepackage{color}
+\usepackage{asymptote}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{makeidx}
+\usepackage{multido}
+
+\usepackage{pst-sigsys,pst-plot,pstricks-add}
+\usepackage{pst-pdf}
+
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\def\nn{\nonumber}
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\newcommand{\fs}[2]{#2}
+
+
+
+
+\title[]{Properties of LTI Systems}
+\author[\textcolor{blue}{Systems and Circuits}]{\textcolor{darkblue}{Pablo M. Olmos} (olmos@tsc.uc3m.es)\\ \textcolor{darkblue}{Emilio Parrado} (emipar@tsc.uc3m.es)}
+\institute{\textcolor{white}{UC3M}}
+
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.40}
+\setbeamercolor{title}{fg=darkblue}
+\setbeamercolor{frametitle}{fg=darkblue}
+\definecolor{darkgreen}{rgb}{0.0, 0.4, 0.0}
+
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Index}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+\frame{
+\titlepage
+\thispagestyle{empty}
+\begin{center}
+\includegraphics[scale=0.05]{Figures/uc3m-logo.pdf}
+\end{center}
+}
+
+\section{Properties of LTI Systems}
+
+\frame{
+
+\begin{itemize}
+\item LTI systems are completely determined by their impulse response $h(t)$ ($h[n]$).
+\end{itemize}
+\begin{itemize}
+\item Consequently, we should be able to deduce further properties of these systems just by inspecting  $h(t)$ ($h[n]$):
+\begin{enumerate}
+\item Memory.
+\item Invertibility.
+\item Causality.
+\item Stability.
+\end{enumerate}
+\end{itemize}
+
+%\begin{alertblock}{ }
+%We don't need the LIT system input/output relationship
+%\end{alertblock}
+
+}
+
+\frame{
+\frametitle{Memoryless  discrete-time LTI systems}
+
+%\begin{exampleblock}{}
+%A system $x[n]\rightarrow y[n]$ is said to be memoryless if the output a one time instant $n_0$, $y[n_0]$, only depends on the input at the same time instant, i.e. $x[n_0]$.
+%\end{exampleblock}
+
+Given the impulse response of a LTI system $h[n]$ and its output for an arbitrary input $x[n]$
+\begin{align}\nn
+y[n]=\sum_{k=-\infty}^{\infty}x[k]h[n-k]=x[n]h[0]+\sum_{\substack{k=-\infty\\k\neq n}}^{\infty}x[k]h[n-k],
+\end{align}
+we observe that the system is memoryless only if $h[n]=0$ for any $n\neq0$. 
+
+\begin{block}{Memoryless discrete-time LTI systems}
+The impulse response is of the form
+\begin{align}\nn
+h[n]=a\delta[n]
+\end{align}
+where $a\in\mathbb{C}$ is a constant.
+\end{block}
+
+
+}
+
+\frame{
+\frametitle{Memoryless  continuous-time LTI systems}
+
+\begin{exampleblock}{}
+Given the impulse response of an LTI system $h(t)$ and its output for an arbitrary input $x(t)$
+\begin{align*}
+y(t)=\int_{-\infty}^{\infty}{x(\tau)h(t-\tau)d\tau}=\int_{-\infty}^{\infty}{x(t-\nu)h(\nu)d\nu},
+\end{align*}
+we conclude that the system is memoryless only if $h(t)=a\delta(t)$, where $a\in\mathbb{C}$.
+\end{exampleblock}
+
+Hint: $h(t)$ must be zero at any point except at $t=0$ to remove the dependency  of $y(t)$ on $x(t')$ at any $t'\neq t$. Besides, because of the differential $d\nu$ inside the integral, $h(0)$ must tend to $\infty$. Indeed, $h(t)$ must be of the form $a\delta(t)$.
+
+
+}
+%\frame{
+%
+%\begin{exampleblock}{For any $t_0=k_0\Delta$}
+%\begin{align*}
+%y_{\Delta}(k_0\Delta)=x(k_0\Delta)h_\Delta(0)\Delta+\sum_{\substack{k=-\infty\\k\neq k_0}}^{\infty}{x(k\Delta) {\color{blue}h_\Delta(k_0\Delta-k\Delta)}\Delta}
+%\end{align*}
+%if $h_\Delta(t)=0$ for $t\neq0$, then $y_{\Delta}(k_0\Delta)$ only depends on $x(k_0\Delta)$!
+%\end{exampleblock}
+%
+%Besides, in the limit $\Delta\rightarrow 0$,  we need
+%\begin{align*}
+%\lim_{\Delta\rightarrow 0} h_\Delta(0)\Delta =a,
+%\end{align*}
+%where $a\in\mathbb{C}$ is a constant.  Otherwise,  $\lim_{\Delta\rightarrow 0}y_{\Delta}(t_0)=0$ !!
+
+%\begin{alertblock}{}
+%\begin{align*}
+%\lim_{\Delta\rightarrow 0} \Delta  h_\Delta(t) =
+%\left\{\begin{array}{cc}
+%a & t=0\\
+%0 & t\neq 0
+%\end{array}
+%\right.
+%=a\delta (t)
+%\end{align*}
+%\end{alertblock}
+%}
+
+\frame{
+\frametitle{Causality in LTI Systems}
+\begin{exampleblock}{}
+A system is causal if the output at any time depends only on the  input at the present time and at any time in the past. 
+\end{exampleblock}
+
+Given two LTI systems with impulse response $h[n]$ and $h(t)$ and the output for an arbitrary input  $x[n]$ and $x(t)$
+\begin{align}\nn
+y[n]=\sum_{k=-\infty}^{\infty}x[k]h[n-k], \qquad y(t)=\int_{-\infty}^{\infty}{x(\tau)h(t-\tau)d\tau},
+\end{align}
+%the system is causal if $y[n]$ only depends on $x[n]$, $x[n-1]$, $\ldots$
+the systems are causal if 
+\begin{block}{}
+\begin{align}\nn
+h[n]=0 \quad n<0,\\\nn
+h(t)=0 \quad t<0.
+\end{align}
+\end{block}
+}
+
+
+\frame{
+\frametitle{Stability in LTI systems}
+%\begin{exampleblock}{Bounded Input, Bounded Output (BIBO) stability}
+%If a system is BIBO stable, then the output will be bounded for every input to the system that is bounded. 
+%%
+%%\\
+%%A signal is bounded if there is a finite value $B$ such that the signal never exceeds $B$, that is
+%%\begin{align}\nn
+%%|x[n]|&\leq B\qquad \forall n\in\mathbb{Z} \\\nn
+%%|x(t)|&\leq B\qquad \forall t\in\mathbb{R}
+%%\end{align}
+%\end{exampleblock}
+
+Given a discrete-time LTI system $h[n]$ and an input signal $x[n]$ such that $|x[n]|<B$ $\forall n$, the output signal
+\begin{align}\nn
+y[n]=\sum_{k=-\infty}^{\infty}x[k]h[n-k].
+\end{align}
+can be bounded as follows
+\begin{align}\nn
+|y[n]|&=|\sum_{k=-\infty}^{\infty}x[k]h[n-k]|\leq \sum_{k=-\infty}^{\infty} |x[k]||h[n-k]|\\\nn
+&<\sum_{k=-\infty}^{\infty}  B|h[n-k]|=B\sum_{k=-\infty}^{\infty} |h[n-k]|.
+\end{align}
+
+\begin{alertblock}{}
+The LTI system is stable if $\displaystyle \sum_{k=-\infty}^{\infty} |h[k]|<\infty$
+\end{alertblock}
+}
+
+\frame{
+
+\begin{itemize}
+\item For continuous-time LTI systems the stability condition can be proven in a similar way (\textbf{Exercise}).
+\end{itemize}
+
+
+
+\begin{block}{BIBO stable LTI systems}
+A discrete-time LTI system with impulse response $h[n]$ is stable if
+\begin{align}\nn
+\sum_{k=-\infty}^{\infty} |h[k]|<\infty
+%,\\\nn
+%\int_{-\infty}^{\infty}|h(\tau)|\text{d}\tau<\infty.
+\end{align}
+A continuous-time LTI system with impulse response $h(t)$ is stable if
+\begin{align*}
+\int_{-\infty}^{\infty}|h(\tau)|\text{d}\tau<\infty.
+\end{align*}
+\end{block}
+
+}
+
+\frame{
+\frametitle{Invertibility of LTI Systems}
+
+\begin{exampleblock}{}
+\begin{itemize}
+\item A system is said to be invertible if distinct inputs lead to distinct outputs.
+\item We have a one to one input-output correspondence.
+\item By observing its output, we can determine its input. 
+\end{itemize}
+\end{exampleblock}
+
+A LTI system $h(t)$ is invertible if we are able to find another LTI system with impulse response $h_{\text{inv}}(t)$ such that:
+\vspace{0.5cm}
+
+\begin{center}
+\begin{pspicture}[](8,2)
+   \pssignal(0,1){x}{$x(t)$}
+   \psblock(2,1){a}{$h(t)$}
+   \psblock(5,1){b}{$h_{\text{inv}}(t)$}
+   \pssignal(8,1){y}{$x(t)$}
+   %-----------------
+   \psset{arrows=->}
+   \ncline{x}{a}  \ncline{a}{b}  \ncline{b}{y}
+\end{pspicture}
+\end{center}
+
+}
+
+\frame{
+By the associative property
+\begin{center}
+\begin{pspicture}[](7,2)
+   \pssignal(0,1){x}{$x(t)$}
+   \psblock(3,1){a}{$h(t)\ast h_{\text{inv}}(t)$}
+   %\psblock(4,1){b}{$h[n], H(z)$}
+   \pssignal(6,1){y}{$x(t)$}
+   %-----------------
+   \psset{arrows=->}
+   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+\end{pspicture}
+\vspace{0.5cm}
+\end{center}
+
+Therefore,
+\begin{align}\nn
+h(t)\ast h_{\text{inv}}(t)=\delta(t)
+\end{align}
+
+\begin{block}{Invertible LTI systems}
+\begin{itemize}
+\item $h[n]$ is invertible $\Longleftrightarrow$ there exists $h_{\text{inv}}[n]$ such that $h[n]\ast h_{\text{inv}}[n]=\delta[n]$.
+\item  $h(t)$ is invertible $\Longleftrightarrow$ there exists $h_{\text{inv}}(t)$ such that $h(t)\ast h_{\text{inv}}(t)=\delta(t)$.
+\end{itemize}
+\end{block}
+
+}
+
+\section{The unit step response of an LTI systems}
+
+\frame{
+\frametitle{The unit step response of an LTI systems}
+
+\begin{itemize}
+\item LTI systems are completely characterized by their impulse response.
+%We have seen that the representation of an LTI system in terms of its unit impulse response allow us to obtain explicit characterization of the system properties.
+\item Sometimes, it is easier to observe the system's output response to the unit step.
+\item Let's see how we can obtain the impulse response from the system's output response to the unit step.
+\end{itemize}
+}
+
+\frame{
+Assume an LTI system for which $h[n]$ is unknown:
+\begin{center}
+\begin{pspicture}[](5,2)
+   \pssignal(0,1){x}{$u[n]$}
+   \psblock(2,1){a}{$h[n]$}
+   %\psblock(4,1){b}{$h[n], H(z)$}
+   \pssignal(4,1){y}{$s[n]$}
+   %-----------------
+   \psset{arrows=->}
+   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+\end{pspicture}
+\vspace{0.5cm}
+\end{center}
+
+\begin{align}\nn
+s[n]&=u[n]\ast h[n]=\sum_{k=-\infty}^{\infty}u[k]h[n-k]=\sum_{k=0}^{\infty}h[n-k]=\sum_{v=-\infty}^{n}h[v]
+\end{align}
+
+Therefore,
+
+\begin{exampleblock}{}
+\begin{align}\nn
+h[n]=s[n]-s[n-1]
+\end{align}
+\end{exampleblock}
+
+}
+
+\frame{
+
+Assume a LTI system for which $h(t)$ is unknown:
+\begin{center}
+\begin{pspicture}[](5,2)
+   \pssignal(0,1){x}{$u(t)$}
+   \psblock(2,1){a}{$h(t)$}
+   %\psblock(4,1){b}{$h[n], H(z)$}
+   \pssignal(4,1){y}{$s(t)$}
+   %-----------------
+   \psset{arrows=->}
+   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+\end{pspicture}
+\vspace{0.5cm}
+\end{center}
+
+\begin{align}\nn
+s(t)&=u(t)\ast h(t)=\int_{-\infty}^{\infty} u(\tau)h(t-\tau) d\tau=\int_{0}^{\infty}h(t-\tau) d\tau=\int_{-\infty}^{t}h(\psi) d\psi
+\end{align}
+
+Therefore,
+
+\begin{exampleblock}{}
+\begin{align}\nn
+h(t)=\frac{\partial s(t)}{\partial t}
+\end{align}
+\end{exampleblock}
+
+
+}
+
+%
+%
+%\frame{
+%\frametitle{Time Invariance}
+%
+%\begin{block}{}
+%A system is time-invariant if a time shift in the input signal causes a time shift in the output signal.
+%\end{block}
+%\vspace{0.5cm}
+%
+%\begin{itemize}
+%\item If $y[n]=f(x[n])$, the system is invariant if $f(x[n-n_0])=y[n-n_0]$. 
+%\item If $y(t)=f(x(t))$, the system is invariant if $f(x(t-t_0))=y(t-t_0)$. 
+%\end{itemize}
+%}
+%
+%
+%\frame{
+%\frametitle{Linearity}
+%Linear system posses the important property of superposition.
+%
+%\begin{exampleblock}{}
+% For any system, consider two arbitrary inputs and their respective outputs:
+%\begin{align}\nn
+%x_1(t)\rightarrow y_1(t)\\\nn
+%x_2(t)\rightarrow y_2(t),
+%\end{align}
+%the system is linear if 
+%\begin{align}\nn
+%ax_1(t)+bx_2(t)\rightarrow ay_1(t)+by_2(t)
+%\end{align}
+%for any two complex constant $a,b\in\mathbb{C}$.
+%\end{exampleblock}
+%
+%\begin{block}{Linear discrete-time signals}
+%\begin{align}\nn
+%ax_1[n]+bx_2[n]\rightarrow ay_1[n]+by_2[n]
+%\end{align}
+%\end{block}
+%
+%}
+%
+%
+%\section{Discrete-time LTI systems}
+%
+%\frame{
+%
+%\begin{pspicture}[](5,2)
+%   \pssignal(0,1){x}{$x[n]$}
+%   \psblock(2,1){a}{LTI}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(4,1){y}{$y[n]$?}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%
+%\vspace{0.5cm}
+%Remember that any discrete-time sequence $x[n]$ can be decomposed as a linear combination of unit impulses:
+%\begin{block}{}
+%\begin{align}\nn
+%x[n]&=\sum_{k=-\infty}^{\infty}x[k]\delta[n-k]\\\nn
+%&=\ldots+x[-20]\delta[n+20]+x[-19]\delta[n+19]+\ldots\\\nn
+%&+x[-1]\delta[n+1]+x[0]\delta[n]+x[1]\delta[n-1]+\ldots+x[k]\delta[n-k]
+%\end{align}
+%\end{block}
+%}
+%
+%\frame{
+%If we are able to compute
+%\vspace{0.5cm}
+%
+%\begin{center}
+%\begin{pspicture}[](6.5,5)
+%	
+%   \pssignal(0,5){x1}{$\delta[n]$}
+%    \psblock(2,5){a1}{LTI}
+%    \pssignal(4,5){y1}{$h_0[n]$}   
+%   \pssignal(0,4){x2}{$\delta[n+1]$}
+%    \psblock(2,4){a2}{LTI}
+%    \pssignal(4,4){y2}{$h_{-1}[n]$}      
+%     \pssignal(0,3){x3}{$\delta[n-1]$}
+%    \psblock(2,3){a3}{LTI}
+%    \pssignal(4,3){y3}{$h_{1}[n]$}     
+%    
+%    \ldotsnode[angle=90](0,2){dots}
+%    \ldotsnode[angle=90](2,2){dots}
+%    \ldotsnode[angle=90](4,2){dots}
+%    
+%    \pssignal(0,1){x4}{$\delta[n-k]$}
+%    \psblock(2,1){a4}{LTI}
+%    \pssignal(4,1){y4}{$h_{k}[n]$}   
+%    
+%   \psset{arrows=->}
+%   \ncline{x1}{a1}  \ncline{a1}{y1}    
+%   \ncline{x2}{a2}  \ncline{a2}{y2}  
+%    \ncline{x3}{a3}  \ncline{a3}{y3} 
+%     \ncline{x4}{a4}  \ncline{a4}{y4}  
+%       
+%\end{pspicture}
+%\end{center}
+%
+%Since the system is linear, we can make use of the superposition property.
+%}
+%
+%\frame{
+%
+%
+%\begin{pspicture}[](9,2)
+%   \pssignal(0,1){x}{$x[n]=\sum_{k=-\infty}^{\infty}x[k]\delta[n-k]$}
+%   \psblock(4,1){a}{LTI}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(6,1){y}{$y[n]$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%
+%\vspace{0.5cm}
+%\begin{exampleblock}{}
+%\begin{align}\nn
+%y[n]=\sum_{k=-\infty}^{\infty}x[k]h_{k}[n]
+%\end{align}
+%\end{exampleblock}
+%
+%\vspace{0.5cm}
+%Besides, the system is time-invariant!
+%}
+%
+%\frame{
+%
+%\begin{center}
+%\begin{pspicture}[](8,5)
+%	
+%   \pssignal(0,5){x1}{$\delta[n]$}
+%    \psblock(2,5){a1}{LTI}
+%    \pssignal(5,5){y1}{$h_0[n]=h[n]$}   
+%   \pssignal(0,4){x2}{$\delta[n+1]$}
+%    \psblock(2,4){a2}{LTI}
+%    \pssignal(5,4){y2}{$h_{-1}[n]=h[n+1]$}      
+%     \pssignal(0,3){x3}{$\delta[n-1]$}
+%    \psblock(2,3){a3}{LTI}
+%    \pssignal(5,3){y3}{$h_{1}[n]=h[n-1]$}     
+%    
+%    \ldotsnode[angle=90](0,2){dots}
+%    \ldotsnode[angle=90](2,2){dots}
+%    \ldotsnode[angle=90](4,2){dots}
+%    
+%    \pssignal(0,1){x4}{$\delta[n-k]$}
+%    \psblock(2,1){a4}{LTI}
+%    \pssignal(5,1){y4}{$h_{k}[n]=h[n-k]$}   
+%    
+%   \psset{arrows=->}
+%   \ncline{x1}{a1}  \ncline{a1}{y1}    
+%   \ncline{x2}{a2}  \ncline{a2}{y2}  
+%    \ncline{x3}{a3}  \ncline{a3}{y3} 
+%     \ncline{x4}{a4}  \ncline{a4}{y4}  
+%       
+%\end{pspicture}
+%\end{center}
+%
+%Therefore, for any input $x[n]$, if $h[n]$ is known then the system output is given by
+%
+%\begin{alertblock}{}
+%\begin{align}\nn
+%y[n]=\sum_{k=-\infty}^{\infty}x[k]h_{k}[n]=\sum_{k=-\infty}^{\infty}x[k]h[n-k]
+%\end{align}
+%\end{alertblock}
+%
+%}
+%
+%\frame{
+%
+%\begin{itemize}
+%\item $h[n]$ is the system's impulse response.
+%\item Any LTI system is completely defined by $h[n]$:
+%\vspace{0.3cm}
+%\begin{center}
+%\begin{pspicture}[](5,2)
+%   \pssignal(0,1){x}{$x[n]$}
+%   \psblock(2,1){a}{$h[n]$}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(4,1){y}{$y[n]$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{center}
+%\end{itemize}
+%
+%
+%\begin{block}{Convolution}
+%Given two discrete-time signals $x[n]$ and $h[n]$:
+%\begin{align}\nn
+%\sum_{k=-\infty}^{\infty}x[k]h[n-k]=x[n]\ast h[n]
+%\end{align}
+%is the convolution operation between them.
+%\end{block}
+%
+%
+%}
+%
+%
+%\frame{
+%\frametitle{Example I}
+%
+%\psset{xunit=0.75cm,yunit=0.75cm}
+%
+%\begin{tabular}{|c|c|}
+%\hline
+%\begin{pspicture}[showgrid](-2,-1)(4,3)
+%  \rput(0,0){\psaxeslabels(0,0)(-2,0)(4,0){$n$}{}
+%     \rput[tl](-2,3){$x[n]$}
+%     \psstem[style=Stem,linecolor=blue](-1,1)
+%            {0,1,2,0}}
+%\end{pspicture}
+%&
+%\begin{pspicture}[showgrid](-1,-1)(5,3)
+%  \rput(0,0){\psaxeslabels(0,0)(-1,0)(5,0){$n$}{}
+%     \rput[tl](-1,3){$h[n]$}
+%     \psstem[style=Stem,linecolor=blue](0,1)
+%            {0,1,1,1,0}}
+%\end{pspicture}\\
+%\hline
+%\end{tabular}
+%
+%
+%}
+%
+%\frame{
+%\frametitle{Example I}
+%
+%\psset{xunit=0.75cm,yunit=0.75cm}
+%
+%\begin{center}
+%
+%\begin{pspicture}[showgrid](0,-1)(6,3)
+%  \rput(0,0){\psaxeslabels(0,0)(0,0)(6,0){$n$}{}
+%     \rput[tl](0,3){$y[n]$}
+%     \psstem[style=Stem,linecolor=red](1,1)
+%            {1,3,3,2,0}}
+%\end{pspicture}
+%
+%\end{center}
+%
+%}
+%
+%\frame{
+%\frametitle{Example II}
+%
+%\psset{xunit=0.75cm,yunit=0.75cm}
+%
+%\begin{center}
+%
+%\begin{tabular}{|c|c|}
+%\hline
+%\begin{pspicture}[showgrid](-1,-1)(4,5)
+%  \rput(0,0){\psaxeslabels(0,0)(-1,0)(4,0){$n$}{}
+%     \rput[tl](-1,3){$x[n]$}
+%     \psstem[style=Stem,linecolor=blue](-1,1)
+%            {0,4,1,2,5}}
+%\end{pspicture}
+%&
+%\begin{pspicture}[showgrid](-2,-1)(3,3)
+%  \rput(0,0){\psaxeslabels(0,0)(-2,0)(3,0){$n$}{}
+%     \rput[tl](-2,3){$h[n]$}
+%     \psstem[style=Stem,linecolor=blue](-2,1)
+%            {0,1,2,-1}}
+%\end{pspicture}\\
+%\hline
+%\end{tabular}
+%
+%\end{center}
+%
+%\url{http://www.youtube.com/watch?v=yyTu0SXeW1M}
+%
+%}
+%
+%\frame{
+%\frametitle{Example II}
+%
+%\psset{xunit=0.5cm,yunit=0.5cm}
+%
+%\begin{center}
+%
+%\begin{pspicture}[showgrid](-2,-5)(7,10)
+%  \rput(0,0){\psaxeslabels(0,0)(-2,0)(7,0){$n$}{}
+%     \rput[tl](-2,10){$y[n]$}
+%     \psstem[style=Stem,linecolor=red](-2,1)
+%            {0,4,9,0,8,8,-5,0}}
+%\end{pspicture}
+%
+%\end{center}
+%
+%}
+%
+%
+%
+%\section{Continuous-time LTI systems}
+%
+%\frame{
+%
+%\textbf{\color{red}{The discussion for continuous-time LTI systems is just a generalization of the discrete-time case.}}
+%
+%
+%\begin{center}
+%\begin{pspicture}[](5,2)
+%   \pssignal(0,1){x}{$x(t)$}
+%   \psblock(2,1){a}{LTI}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(4,1){y}{$y(t)?$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{center}
+%
+%\vspace{0.5cm}
+%Remember that any continuous-time signal $x(t)$ can be decomposed as a linear combination of an infinite number of
+%impulses:
+%\begin{block}{}
+%\begin{align}\nn
+%x(t)=\int_{-\infty}^{\infty}x(\tau)\delta(t-\tau)d\tau
+%\end{align}
+%\end{block}
+%}
+%
+%
+%\frame{
+%
+%If the system's output is known for $\delta(t-\tau)$ for any $\tau\in\mathbb{R}$:
+%
+%\begin{center}
+%\begin{pspicture}[](5,2)
+%   \pssignal(0,1){x}{$\delta(t-\tau)$}
+%   \psblock(2,1){a}{LTI}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(4,1){y}{$h_{\tau}(t)$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{center}
+%
+%Then, by the superposition property,
+%
+%\begin{center}
+%\begin{pspicture}[](7,2)
+%   \pssignal(0,1){x}{$\displaystyle x(t)=\int_{-\infty}^{\infty}x(\tau)\delta(t-\tau)d\tau$}
+%   \psblock(4,1){a}{LTI}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(6,1){y}{$y(t)$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{center}
+%
+%\begin{exampleblock}{}
+%\begin{align}\nn
+%y(t)=\int_{-\infty}^{\infty} x(\tau)h_{\tau}(t) d\tau 
+%\end{align}
+%\end{exampleblock}
+%
+%}
+%
+%\frame{
+%
+%If the system is time-invariant:
+%
+%\begin{center}
+%\begin{pspicture}[](7,2)
+%   \pssignal(0,2){x}{$\delta(t)$}
+%   \psblock(2,2){a}{LTI}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(5,2){y}{$h_{0}(t)=h(t)$}
+%   
+%    \pssignal(0,1){x1}{$\delta(t-\tau)$}
+%   \psblock(2,1){a1}{LTI}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(5,1){y1}{$h_{\tau}(t)=h(t-\tau)$}  
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%   \ncline{x1}{a1}  \ncline{a1}{y1}
+%\end{pspicture}
+%\end{center}
+%
+%then, we finally obtain
+%
+%\begin{center}
+%\begin{pspicture}[](7,2)
+%   \pssignal(0,1){x}{$\displaystyle x(t)=\int_{-\infty}^{\infty}x(\tau)\delta(t-\tau)d\tau$}
+%   \psblock(4,1){a}{LTI}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(6,1){y}{$y(t)$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{center}
+%
+%\begin{exampleblock}{}
+%\begin{align}\nn
+%y(t)=\int_{-\infty}^{\infty} x(\tau)h(t-\tau) d\tau 
+%\end{align}
+%\end{exampleblock}
+%
+%}
+%
+%\frame{
+%
+%\begin{itemize}
+%\item $h(t)$ is the system's response to the impulse $\delta(t)$.
+%\item Any LTI system is completely defined by $h(t)$:
+%\vspace{0.3cm}
+%\begin{center}
+%\begin{pspicture}[](5,2)
+%   \pssignal(0,1){x}{$x(t)$}
+%   \psblock(2,1){a}{$h(t)$}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(4,1){y}{$y(t)$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{center}
+%\end{itemize}
+%
+%
+%\begin{block}{Convolution}
+%Given two signals $x(t)$ and $h(t)$:
+%\begin{align}\nn
+%\int_{-\infty}^{\infty} x(\tau)h(t-\tau) d\tau=x(t)\ast h(t)
+%\end{align}
+%is the continuous-time convolution operation between them.
+%\end{block}
+%}
+%
+%\frame{
+%
+%\frametitle{Example}
+%
+%\begin{center}
+%\begin{pspicture}[](5,2)
+%   \pssignal(0,1){x}{$x(t)$}
+%   \psblock(2,1){a}{$h(t)=u(t)$}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(4,1){y}{$y(t)?$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{center}
+%
+%\begin{align}\nn
+%x(t)=\left\{
+%\begin{array}{cc}
+%t & 0\leq t\leq 1\\
+%1 & 1<t\leq 2\\
+%0 & \text{otherwise}
+%\end{array}
+%\right.
+%\end{align}
+%
+%\textbf{Sol.}:
+%
+%\begin{align}\nn
+%y(t)=\left\{
+%\begin{array}{cc}
+%0 & \leq t\leq0\\\\
+%\frac{t^2}{2} & 0< t\leq 1\\\\
+%\frac{1}{2}+(t-1) & 1<t\leq 2\\\\
+%\frac{3}{2} & t>2
+%\end{array}
+%\right.
+%\end{align}
+%
+%}
+
+
+%
+%\section{Continuous-time and discrete-time systems}
+%
+%\frame{
+%
+%\begin{center}
+%\begin{tabular}{c}
+%\begin{pspicture}[](6,2)
+%   \pssignal(0,1){x}{$x(t)$}
+%   \psblock(3,1){a}{Continuous-time System}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(6,1){y}{$y(t)$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\\\\\\
+%\begin{pspicture}[](6,2)
+%   \pssignal(0,1){x}{$x[n]$}
+%   \psblock(3,1){a}{Discrete-time System}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(6,1){y}{$y[n]$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{tabular}
+%\end{center}
+%
+%Symbolically, we represent a system as:
+%\begin{align}\nn
+%x(t)\rightarrow y(t)\\\nn
+%x[n]\rightarrow y[n]
+%\end{align}
+%
+%}
+%
+%\frame{
+%\frametitle{Interconnection of systems}
+%
+%Any complex system is designed as the interconnection of simpler systems:
+%
+%
+%\begin{center}
+%\begin{tabular}{c}
+%\textbf{Cascade interconnection}\\\\
+%\begin{pspicture}[](8,2)
+%   \pssignal(0,1){x}{Input}
+%   \psblock(2,1){a}{System 1}
+%   \psblock(5,1){b}{System 2}
+%   \pssignal(8,1){y}{Output}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{b}  \ncline{b}{y}
+%\end{pspicture}
+%\\\\
+%\textbf{Parallel interconnection}\\\\
+%\begin{pspicture}[](6.5,2)
+%	
+%   \pssignal(0,1){x}{Input}
+%   \dotnode(1,1){b}
+%   \dotnode(1,2){c}
+%   \dotnode(1,0){d}
+%   \psblock(3,2){e}{System 1}
+%   \psblock(3,0){f}{System 2}
+%   \dotnode(5,2){g}
+%   \dotnode(5,0){h}
+%   \pscircleop(5,1){oplus}
+%   \pssignal(6.25,1){i}{$y[n]$}
+%   \ncline{x}{b}  \ncline{b}{c}  \ncline{b}{d}
+%    \ncline{e}{g} \ncline{f}{h}
+%   \psset{style=RoundCorners ,style=Arrow}
+%     \ncline{c}{e} \ncline{d}{f}
+%   \ncline{g}{oplus}  \ncline{h}{oplus} \ncline{oplus}{i}
+%\end{pspicture}
+%\end{tabular}
+%\end{center}
+%
+%}
+%
+%\frame{
+%\frametitle{Interconnection of systems}
+%
+%\begin{center}
+%\begin{tabular}{c}
+%\textbf{Series/Parallel interconnection}\\\\
+%\begin{pspicture}[](8,2)
+%	
+%   \pssignal(0,1){x}{Input}
+%   \dotnode(1,1){b}
+%   \dotnode(1,2){c}
+%   \dotnode(1,0){d}
+%   \psblock(2.5,2){e}{System 1}
+%   \psblock(5,2){j}{System 2}
+%   \psblock(4,0){f}{System 3}
+%   \dotnode(6.5,2){g}
+%   \dotnode(6.5,0){h}
+%   \pscircleop(6.5,1){oplus}
+%   \pssignal(8,1){i}{$y[n]$}
+%   
+%   %Conexiones
+%   \ncline{x}{b}  \ncline{b}{c}  \ncline{b}{d}
+%     \ncline{f}{h} \ncline{j}{g}
+%   \psset{style=RoundCorners ,style=Arrow}
+%     \ncline{c}{e} \ncline{d}{f}
+%   \ncline{g}{oplus}  \ncline{h}{oplus} \ncline{oplus}{i}
+%   \ncline{e}{j}
+%\end{pspicture}
+%\end{tabular}
+%\end{center}
+%
+%\begin{block}{}
+%In general, the order is NOT interchangeable.
+%\end{block}
+%
+%}
+%
+%\frame{
+%\begin{align}\nn
+%y[n]=(2x[n]-x[n]^2)^2
+%\end{align}
+%\vspace{1cm}
+%
+%\begin{center}
+%\begin{pspicture}[](7.5,2)
+%	
+%   \pssignal(0,1){x}{$x[n]$}
+%   \dotnode(1,1){b}
+%   \dotnode(1,2){c}
+%   \dotnode(1,0){d}
+%   \psblock(3,2){e}{Multiply by 2}
+%   \psblock(3,0){f}{Square}
+%   \dotnode(5,2){g}
+%   \dotnode(5,0){h}
+%   \pscircleop(5,1){oplus}
+%   \psblock(6.25,1){j}{Square}
+%   \pssignal(8.25,1){i}{$y[n]$}
+%   \ncline{x}{b}  \ncline{b}{c}  \ncline{b}{d}
+%    \ncline{e}{g} \ncline{f}{h}
+%   \psset{style=RoundCorners ,style=Arrow}
+%     \ncline{c}{e} \ncline{d}{f}
+%      \ncline{oplus}{j} \ncline{j}{i}
+%   \ncstar{->}{ncline}[naput]{h -}{oplus} %\ncline{h}{oplus}
+%   \ncline{g}{oplus}
+%\end{pspicture}
+%\end{center}
+%
+%}
+%
+%\section{Properties of systems}
+%
+%\frame{
+%\frametitle{Systems with and without memory}
+%
+%\begin{exampleblock}{}
+%A system $x(t)\rightarrow y(t)$ is said to be memoryless if the output a one time instant $t_0$, $y(t_0)$, only depends on the input at the same time instant, i.e. $x(t_0)$.
+%\end{exampleblock}
+%
+%\textbf{Examples:}
+%
+%\begin{itemize}
+%\item $y[n]=(2x[n]-x[n]^2)^2$ is memoryless.
+%\item $y(t)=\frac{\partial x(t)}{\partial t}$ is memoryless.
+%\item $y(t)=x(t-3)x(t+2)$ is a system with memory.
+%\item $y[n]=x(t-1)$ is a system with memory.
+%\end{itemize}
+%
+%}
+%
+%\frame{
+%\frametitle{Invertibility and inverse systems}
+%
+%\begin{block}{}
+%\begin{itemize}
+%\item A system is said to be invertible if distinct inputs lead to distinct outputs.
+%\item We have a one to one input-output correspondence.
+%\item By observing its output, we can determine its input. 
+%\end{itemize}
+%\end{block}
+%
+%\begin{tabular}{c}
+%\\\\
+%\begin{pspicture}[](9,2)
+%   \pssignal(0,1){x}{$x(t)$}
+%   \psblock(2,1){a}{$y(t)=2x(t)$}
+%   \psblock(5.5,1){b}{$z(t)=\frac{1}{2}y(t)$}
+%   \pssignal(8.25,1){y}{$x(t)$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}   \ncline{b}{y}
+%   \ncstar{->}{ncline}[naput]{a $y(t)$}{b} %\ncline{h}{oplus}
+%\end{pspicture}
+%\\\\
+%\begin{pspicture}[](13,2)
+%   \pssignal(0,1){x}{$x[n]$}
+%   \psblock(3,1){a}{$y[n]=\sum_{k=-\infty}^{n}x[k]$}
+%   \psblock(8,1){b}{$z[n]=y[n]-y[n-1]$}
+%   \pssignal(11,1){y}{$x[n]$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}   \ncline{b}{y}
+%    \ncstar{->}{ncline}[naput]{a $y[n]$}{b} %\ncline{h}{oplus}
+%\end{pspicture}
+%\end{tabular}
+%}
+%
+%\frame{
+%
+%Are invertible the following systems?
+%
+%\begin{itemize}
+%\item $y[n]=x[2n]$
+%\item $y(t)=x(2t)$
+%\item $y(t)=x^{2}(t)$
+%\end{itemize}
+%
+%}
+%
+%\frame{
+%\frametitle{Causality}
+%
+%\begin{exampleblock}{}
+%\begin{itemize}
+%\item A system is causal if the output at any time depends only on values of the input at the present time and in the past. 
+%\item A causal system is also referred to as nonanticipative.
+%\item $y(t)=f(x(t))$ is causal if $y(t_0)$ only depends on $x(t)$ for $t\leq t_0$.
+%\item $y[n]=f(x[n])$ is causal if $y[n_0]$ only depends on $x[n]$ for $n\leq n_0$.
+%\item Memoryless systems are always causal.
+%\end{itemize}
+%\end{exampleblock}
+%
+%\begin{itemize}
+%\item $y[n]=x[n]-x[n+1]$ is not causal.
+%\item $y(t)=x(t+1)$ is not causal.
+%\end{itemize}
+%
+%}
+%
+%\frame{
+%\frametitle{Stability}
+%
+%\begin{exampleblock}{Intuitive notion}
+%A system is stable if finite input values lead to responses that do not diverge.
+%\end{exampleblock}
+%
+%\begin{block}{Bounded Input, Bounded Output (BIBO) stability}
+%If a system is BIBO stable, then the output will be bounded for every input to the system that is bounded. \\
+%
+%A signal is bounded if there is a finite value $B$ such that the signal never exceeds $B$, that is
+%\begin{align}\nn
+%|x[n]|&\leq B\qquad \forall n\in\mathbb{Z} \\\nn
+%|x(t)|&\leq B\qquad \forall t\in\mathbb{R}
+%\end{align}
+%\end{block}
+%
+%}
+%
+%\frame{
+%
+%The systems
+%\begin{align}\nn
+%y(t)&=\frac{1}{x(t)-3}\\
+%y(t)&=\log(x(t)-3)\nn
+%\end{align}
+%are not stable.
+%}
+%
+%\frame{
+%\frametitle{Time Invariance}
+%
+%\begin{block}{}
+%A system is time-invariant if a time shift in the input signal causes a time shift in the output signal.
+%\end{block}
+%\vspace{0.5cm}
+%
+%\begin{itemize}
+%\item If $y[n]=f(x[n])$, the system is invariant if $f(x[n-n_0])=y[n-n_0]$. 
+%\item If $y(t)=f(x(t))$, the system is invariant if $f(x(t-t_0))=y(t-t_0)$. 
+%\end{itemize}
+%}
+%
+%\frame{
+%
+%\begin{exampleblock}{$y(t)=\sin(x(t))$}
+%Let $x_1(t)$ be the input:
+%\begin{align}\nn
+%y_1(t)=\sin(x_1(t)).
+%\end{align}
+%Define $x_2(t)=x_1(t-t_0)$:
+%\begin{align}\nn
+%y_2(t)=\sin(x_2(t))=\sin(x_1(t-t_0))=y_1(t-t_0).
+%\end{align}
+%The system is time-invariant.
+%\end{exampleblock}
+%}
+%
+%\frame{
+%
+%\begin{alertblock}{$y[n]=nx[n]$}
+%Let $x_1[n]$ be the input:
+%\begin{align}\nn
+%y_1[n]=nx_1[n].
+%\end{align}
+%Define $x_2[n]=x_1[n-n_0]$:
+%\begin{align}\nn
+%&y_2[n]=nx_2[n]=nx_1[n-n_0]\\\nn
+% &y_1[n-n_0]=(n-n_0)x_1[n-n_0].
+%\end{align}
+%The system is NOT time-invariant.
+%\end{alertblock}
+%
+%}
+%
+%\frame{
+%\frametitle{Linearity}
+%Linear system posses the important property of superposition.
+%
+%\begin{exampleblock}{}
+% For any system, consider two arbitrary inputs and their respective outputs:
+%\begin{align}\nn
+%x_1(t)\rightarrow y_1(t)\\\nn
+%x_2(t)\rightarrow y_2(t),
+%\end{align}
+%the system is linear if 
+%\begin{align}\nn
+%ax_1(t)+bx_2(t)\rightarrow ay_1(t)+by_2(t)
+%\end{align}
+%for any two complex constant $a,b\in\mathbb{C}$.
+%\end{exampleblock}
+%
+%\begin{block}{Linear discrete-time signals}
+%\begin{align}\nn
+%ax_1[n]+bx_2[n]\rightarrow ay_1[n]+by_2[n]
+%\end{align}
+%\end{block}
+%
+%}
+%
+%\frame{
+%The systems 
+%\begin{align}\nn
+%y[n]=(x[n])^{2},\\\nn
+%y[n]=\exp(x[n]),
+%\end{align}
+%are not linear. 
+%\vspace{0.5cm}
+%
+%The system
+%\begin{align}\nn
+%y[n]=x[n]-x[n-3]+4x[n-8]
+%\end{align}
+%is linear.
+%
+%}
+%
+%
+%
+%\frame{
+%Videos about signals and systems with examples (University of Arizona State):
+%
+%\begin{exampleblock}{}
+%\url{https://sites.google.com/a/asu.edu/signals-and-systems/\#TOC-System-Properties}
+%\end{exampleblock}
+%
+%}
+
+
+\end{document}

@@ -1,0 +1,45 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Change Log}{2}{section.2}
+\contentsline {section}{\numberline {3}Macros}{3}{section.3}
+\contentsline {subsection}{\numberline {3.1}\unhbox \voidb@x \hbox {\texttt {\textbackslash psaxeslabels}}}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}\unhbox \voidb@x \hbox {\texttt {\textbackslash pstick}}}{4}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}\unhbox \voidb@x \hbox {\texttt {\textbackslash psTick}}}{5}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}\unhbox \voidb@x \hbox {\texttt {\textbackslash pssignal}}}{6}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}\unhbox \voidb@x \hbox {\texttt {\textbackslash psstem}}}{6}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}\unhbox \voidb@x \hbox {\texttt {\textbackslash pszero}}}{9}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}\unhbox \voidb@x \hbox {\texttt {\textbackslash pspole}}}{10}{subsection.3.7}
+\contentsline {subsection}{\numberline {3.8}\unhbox \voidb@x \hbox {\texttt {\textbackslash pscircleop}}}{11}{subsection.3.8}
+\contentsline {subsection}{\numberline {3.9}\unhbox \voidb@x \hbox {\texttt {\textbackslash psframeop}}}{12}{subsection.3.9}
+\contentsline {subsection}{\numberline {3.10}\unhbox \voidb@x \hbox {\texttt {\textbackslash psdisk}}}{12}{subsection.3.10}
+\contentsline {subsection}{\numberline {3.11}\unhbox \voidb@x \hbox {\texttt {\textbackslash psring}}}{13}{subsection.3.11}
+\contentsline {subsection}{\numberline {3.12}\unhbox \voidb@x \hbox {\texttt {\textbackslash psdiskc}}}{13}{subsection.3.12}
+\contentsline {subsection}{\numberline {3.13}\unhbox \voidb@x \hbox {\texttt {\textbackslash psldots}}}{14}{subsection.3.13}
+\contentsline {subsection}{\numberline {3.14}\unhbox \voidb@x \hbox {\texttt {\textbackslash ldotsnode}}}{15}{subsection.3.14}
+\contentsline {subsection}{\numberline {3.15}\unhbox \voidb@x \hbox {\texttt {\textbackslash psblock}}}{16}{subsection.3.15}
+\contentsline {subsection}{\numberline {3.16}\unhbox \voidb@x \hbox {\texttt {\textbackslash psfblock}}}{16}{subsection.3.16}
+\contentsline {subsection}{\numberline {3.17}\unhbox \voidb@x \hbox {\texttt {\textbackslash psadaptive}}}{17}{subsection.3.17}
+\contentsline {subsection}{\numberline {3.18}\unhbox \voidb@x \hbox {\texttt {\textbackslash psknob}}}{18}{subsection.3.18}
+\contentsline {subsection}{\numberline {3.19}\unhbox \voidb@x \hbox {\texttt {\textbackslash psusampler}}}{19}{subsection.3.19}
+\contentsline {subsection}{\numberline {3.20}\unhbox \voidb@x \hbox {\texttt {\textbackslash psdsampler}}}{19}{subsection.3.20}
+\contentsline {subsection}{\numberline {3.21}\unhbox \voidb@x \hbox {\texttt {\textbackslash nclist}}}{20}{subsection.3.21}
+\contentsline {subsection}{\numberline {3.22}\unhbox \voidb@x \hbox {\texttt {\textbackslash ncstar}}}{21}{subsection.3.22}
+\contentsline {section}{\numberline {4}Extras}{23}{section.4}
+\contentsline {subsection}{\numberline {4.1}New Styles}{23}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Brace Macros}{24}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Golden Ratio}{25}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Frame Width and Height}{26}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Fill Color}{26}{subsection.4.5}
+\contentsline {section}{\numberline {5}Examples}{26}{section.5}
+\contentsline {subsection}{\numberline {5.1}Complex Number}{27}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Plotting}{28}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Sampling}{29}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Pole-Zero Diagram}{31}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Butterworth Filter}{32}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Region of Convergence}{33}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Block Diagrams}{34}{subsection.5.7}
+\contentsline {subsection}{\numberline {5.8}C/D Converter}{35}{subsection.5.8}
+\contentsline {subsection}{\numberline {5.9}Direct Form II}{36}{subsection.5.9}
+\contentsline {subsection}{\numberline {5.10}Filter Bank}{38}{subsection.5.10}
+\contentsline {subsection}{\numberline {5.11}System Identification}{39}{subsection.5.11}
+\contentsline {subsection}{\numberline {5.12}Adaptive Linear Combiner}{40}{subsection.5.12}
+\contentsline {section}{\numberline {6}Pruebas Pablo}{41}{section.6}

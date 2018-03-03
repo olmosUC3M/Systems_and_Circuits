@@ -1,0 +1,24 @@
+\begin{pspicture}[showgrid](-4,-6)(4,.5)
+  \psset{style=RoundCorners,gratioWh=1,radius=.25}
+
+  %--- Signals ---
+  \pssignal(-3.25,0){x1}{$x_1[n]$}
+  \pssignal(-1.25,0){x2}{$x_2[n]$}
+  \pssignal(1.25,0){x3}{$x_{k-1}[n]$}
+  \pssignal(3.25,0){x4}{$x_k[n]$}
+  \pssignal(0,-5){y}{$y[n]$}
+
+  %--- Gains, dots, and the adder ---
+  \psknob(-3.25,-1.75){w1}   \nput{180}{w1}{$w_1$}
+  \psknob(-1.25,-1.75){w2}   \nput{180}{w2}{$w_2$}
+  \psknob(1.25,-1.75){w3}    \nput{0}{w3}{$w_{k-1}$}
+  \psknob(3.25,-1.75){w4}    \nput{0}{w4}{$w_k$}
+  \psldots(0,0)   \psldots(0,-1.75)
+  \pscircleop(0,-3.5){oplus}
+
+  %--- Connections ---
+  \psset{style=Arrow}
+  \multido{\nn=1+1}{4}{\ncline{x\nn}{w\nn}}
+  \ncstar[armA=.75,angleA=-90]{ncdiagg}{w1,w2,w3,w4}{oplus}
+  \ncline{oplus}{y}
+\end{pspicture}

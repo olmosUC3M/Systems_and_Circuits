@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Basic definitions}{2}{0}{1}
+\beamer@sectionintoc {2}{Operations with signals}{14}{0}{2}
+\beamer@sectionintoc {3}{Transforming the independent variable}{21}{0}{3}

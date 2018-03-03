@@ -1,0 +1,3 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Discrete Unit step and Impulse}{2}{0}{1}
+\beamer@sectionintoc {2}{Continuous-time Unit Step and Unit Impulse}{9}{0}{2}

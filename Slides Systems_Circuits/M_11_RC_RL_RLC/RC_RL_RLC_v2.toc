@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Quick review: capacitors and inductors}{2}{0}{1}
+\beamer@sectionintoc {2}{General solution of the first order linear differential equation}{7}{0}{2}
+\beamer@sectionintoc {3}{RC circuits}{9}{0}{3}
+\beamer@sectionintoc {4}{RL circuits}{18}{0}{4}

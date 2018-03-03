@@ -1,0 +1,899 @@
+
+\documentclass[handout]{beamer}
+\mode<handout>
+{
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\pgfpagesdeclarelayout{2 on 1 boxed with notes}
+{
+\edef\pgfpageoptionheight{\the\paperheight} 
+\edef\pgfpageoptionwidth{\the\paperwidth}
+\edef\pgfpageoptionborder{0pt}
+}
+{
+\setkeys{pgfpagesuselayoutoption}{landscape}
+\pgfpagesphysicalpageoptions
+    {%
+        logical pages=4,%
+        physical height=\pgfpageoptionheight,%
+        physical width=\pgfpageoptionwidth,%
+        last logical shipout=2%
+    }
+\pgfpageslogicalpageoptions{1}
+    {%
+    border code=\pgfsetlinewidth{1 pt}\pgfstroke,%
+    scale=1,
+    center=\pgfpoint{.25\pgfphysicalwidth}{.75\pgfphysicalheight}%
+    }%
+\pgfpageslogicalpageoptions{2}
+    {%
+    border code=\pgfsetlinewidth{1pt}\pgfstroke,%
+    scale=1,
+    center=\pgfpoint{.25\pgfphysicalwidth}{.25\pgfphysicalheight}%
+    }%
+\pgfpageslogicalpageoptions{3}
+    {%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.7\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.75\pgfphysicalwidth}{.29\pgfphysicalheight},%
+    copy from=3
+    }%
+\pgfpageslogicalpageoptions{4}
+    {%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.7\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.75\pgfphysicalwidth}{.79\pgfphysicalheight},%
+    copy from=4
+    }%
+
+\AtBeginDocument
+    {
+    \newbox\notesbox
+    \setbox\notesbox=\vbox
+        {
+            \hsize=\paperwidth
+            \vskip-1in\hskip-1in\vbox
+            {
+                \vskip1cm
+                Notas
+%                \vskip1cm
+%                        \hrule width\paperwidth\vskip1cm
+%                    \hrule width\paperwidth\vskip1cm
+%                        \hrule width\paperwidth\vskip1cm
+%                    \hrule width\paperwidth\vskip1cm
+%                        \hrule width\paperwidth\vskip1cm
+%                    \hrule width\paperwidth\vskip1cm
+%                    \hrule width\paperwidth\vskip1cm
+%                    \hrule width\paperwidth\vskip1cm
+%                        \hrule width\paperwidth
+            }
+        }
+        \pgfpagesshipoutlogicalpage{3}\copy\notesbox
+        \pgfpagesshipoutlogicalpage{4}\copy\notesbox
+    }
+}
+}
+
+\pgfpagesuselayout{2 on 1 boxed with notes}[letterpaper,border shrink=5mm]
+
+\usetheme{Boadilla}
+%\usecolortheme{seahorse}
+% \usefonttheme{structurebold}
+\usefonttheme{serif}
+
+\usepackage{etex}
+% \usepackage{helvet}
+\usepackage{amsmath, amssymb}
+\usepackage{color}
+\usepackage{asymptote}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{makeidx}
+\usepackage{multido}
+\usepackage{adjustbox}
+\usepackage{cancel}
+
+\usepackage{pst-sigsys,pst-plot,pstricks-add}
+\usepackage{pst-pdf}
+
+\usepackage[american voltages, american currents,siunitx]{circuitikz}
+%\sisetup{load=derived} % loading \siemens
+
+
+\makeatletter
+% create the shape
+\pgfcircdeclarebipole{}{\ctikzvalof{bipoles/interr/height 2}}{spst}{\ctikzvalof{bipoles/interr/height}}{\ctikzvalof{bipoles/interr/width}}{
+
+    \pgfsetlinewidth{\pgfkeysvalueof{/tikz/circuitikz/bipoles/thickness}\pgfstartlinewidth}
+
+    \pgfpathmoveto{\pgfpoint{\pgf@circ@res@left}{0pt}}
+    \pgfpathlineto{\pgfpoint{.6\pgf@circ@res@right}{\pgf@circ@res@up}}
+    \pgfusepath{draw}   
+}
+
+% make the shape accessible with nice syntax
+\def\pgf@circ@spst@path#1{\pgf@circ@bipole@path{spst}{#1}}
+\tikzset{switch/.style = {\circuitikzbasekey, /tikz/to path=\pgf@circ@spst@path, l=#1}}
+\tikzset{spst/.style = {switch = #1}}
+\makeatother
+
+
+
+%
+%%%=== showexpl ======================================================
+%\usepackage{showexpl}
+%\lstdefinelanguage{PSTSigSys}{%
+%   morekeywords={psaxeslabels,pstick,pssignal,psstem,pszero,pspole,pscircleop,psframeop,%
+%                 psring,psdisk,psdiskc,psldots,ldotsnode,psblock,psfblock,psadaptive,psknob,%
+%                 psusampler,psdsampler,nclist,ncstar,psBraceUp,psBraceDown,psBraceLeft,psBraceRight},
+%   morekeywords={dotnode},
+%   sensitive=false
+%}
+%\lstset{%
+%   explpreset={numbers=left,numberstyle=\tiny,numbersep=5pt},%
+%   basicstyle=\ttfamily\small,%
+%   rframe=,%
+%   frame=single,%
+%   frameround=tttt,%
+%   aboveskip=\baselineskip,%
+%   belowskip=\baselineskip,%
+%   backgroundcolor=\color{Tangerine!10},%
+%   language=PSTricks,%
+%   alsolanguage=PSTSigSys,%
+%   keywordstyle=\color{ForestGreen},%
+%   commentstyle=\color{DarkBrown}%
+%}
+%%%=== end showexpl ==================================================
+%
+%%%=== colors ========================================================
+%\definecolor{Salmon}{RGB}{178,51,51}
+%\definecolor{BrickRed}{RGB}{233,49,16}
+%\definecolor{TealBlue}{RGB}{16,83,165}
+%\definecolor{ForestGreen}{RGB}{10,112,43}
+%\definecolor{Tangerine}{RGB}{244,176,108}
+%\definecolor{DarkBrown}{RGB}{130,65,0}
+%%%=== end colors ========
+%
+
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\def\nn{\nonumber}
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+
+\title[]{Capacitance and Inductance}
+\author[\textcolor{blue}{}]{\textcolor{violet}{System and Circuits. Topic-4: Filters}\\\vspace*{3mm}\textsf{{\small \textcolor{blue}{Pablo M. Olmos, olmos@tsc.uc3m.es\\ Emilio Parrado, emipar@tsc.uc3m.es\\ Rocio Arroyo Valles, marrval@tsc.uc3m.es}}}
+}
+%\date[]{{\small }}
+\institute{\textcolor{white}{\{olmos,emipar\}@tsc.uc3m.es}}
+%\logo{\includegraphics[scale=0.2]{Figures/uc3m-logo.pdf}}
+
+
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Index}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+\frame{
+\titlepage
+\thispagestyle{empty}
+\begin{center}
+\includegraphics[scale=0.15]{Figures/uc3m-logo.pdf}
+\end{center}
+}
+
+\section{Introduction}
+
+\frame{
+\begin{itemize}
+\item Capacitors and Inductors are passive two-terminal electrical components used to store energy in an electric/magnetic field. %They are able to store electrical charge for a long time after power has been turned off in a circuit. 
+\item  Both are basic components used in electronics where \textbf{current and voltage change} with time, due to their ability  to delay and reshape alternating currents/voltages.
+\item \textbf{Analog filters}: circuits containing resistors, capacitors, inductors y active sources that change with time.
+\end{itemize}
+
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[C] (2,0) 
+(3,0) to[L] (5,0)
+(1,-1) node[]{Capacitor}
+(4,-1) node[]{Inductor};
+\end{circuitikz}
+\end{center}
+
+%\begin{block}{}
+%In the following, we move from time-constant voltage and current sources  to time-varying sources. 
+%\end{block}
+
+
+}
+
+\section{The capacitor}
+
+\frame{
+\frametitle{The capacitor}
+
+\begin{itemize}
+\item Composed by two electrical conductors separated by a dielectric material.
+\item The application of of a voltage to the terminals creates a displace of charge within the dielectric. 
+\item The displacement current is indistinguishable from a conduction current. We simply refer to it as the current across the capacitor.
+\item The current across a capacitor is proportional to the rate at which  the voltage varies with time:
+\begin{align}\nn
+i(t)&=C\frac{d v(t)}{d t} ~~~~\text{ (Fundamental equation of the capacitor) }
+%\Rightarrow v(t)&=\int_{-\infty}^{t}\frac{1}{C}i(\tau)\text{d}\tau
+%=v(t_0)+\int_{t_0}^{t}\frac{1}{C}i(\tau)\text{d}\tau
+\end{align}
+\end{itemize}
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[C=$C$,i>=$i$,v=$v$] (2,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{block}{}
+$C$ is called the capacity and it is measured in Farads (F).
+\end{block}
+\end{column}
+\end{columns}
+
+
+
+}
+
+\frame{
+
+
+
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[C=$C$,i>=$i$,v=$v$] (2,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+i(t)&=C\frac{d v(t)}{d t} 
+%\Rightarrow v(t)&=\int_{-\infty}^{t}\frac{1}{C}i(\tau)\text{d}\tau
+%=v(t_0)+\int_{t_0}^{t}\frac{1}{C}i(\tau)\text{d}\tau
+\end{align}
+\end{column}
+\end{columns}
+
+\begin{alertblock}{Remarks:}
+\begin{enumerate}
+\item If the voltage across the terminals is constant, the current is zero. Thus, \textbf{a capacitor behaves as an open circuit in the presence of a constant voltage}.
+\item The voltage cannot change instantaneously across the capacitor. Such a change would produce infinite current, physically impossible. For any time $t_0$:
+\begin{align*}
+v(t_0^{-})=v(t_0)=v(t_0^{+})
+\end{align*}
+\end{enumerate}
+\end{alertblock}
+
+}
+
+\frame{
+\frametitle{The capacitor}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[C=$C$,i>=$i(t)$,v=$v(t)$] (2,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+i(t)&=C\frac{d v(t)}{d t}
+\end{align}
+\end{column}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{block}{}
+If we know the current across the capacitor along the time $i(t)$, we can compute the voltage $v(t)$ as follows:
+\begin{align}\nn
+v(t)&=\frac{1}{C}\int_{-\infty}^{t}i(\tau)\text{d}\tau=\frac{1}{C}\int_{t_0}^{t}i(\tau)\text{d}\tau+v(t_0)
+\end{align}
+\end{block}
+
+%\begin{exampleblock}{\textbf{Power}}
+%$p(t)=v(t)i(t)=Cv(t)\frac{d v(t)}{d t}\Rightarrow$ $p(t)$ can be positive (we are storing energy) or negative (the energy stored is been given back to the circuit).
+%\end{exampleblock}
+
+
+}
+
+%\frame{
+%\frametitle{Example}
+%The voltage pulse described by the following equations is applied to a $0.5-\mu F$ capacitor: 
+%
+%\begin{align*}
+%v(t)=\left\{
+%\begin{array}{cc}
+%0 & t\leq 0\\
+%4t~V & 0<t\leq 1\\
+%4 e^{-(t-1)}~V & 1<t \leq \infty
+%\end{array}
+%\right.
+%\end{align*}
+%
+%\begin{itemize}
+%\item Derive the expression for the capacitor current.
+%\item Sketch the voltage and current as functions of time.
+%\end{itemize}
+%
+%}
+
+\frame{
+\frametitle{Power and Energy in the Capacitor}
+\begin{block}{}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[C=$C$,i>=$i(t)$,v=$v(t)$] (2,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.2\textwidth}
+\begin{align}\nn
+i(t)&=C\frac{d v(t)}{d t}
+\end{align}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+v(t)&=\frac{1}{C}\int_{t_0}^{t}i(\tau)\text{d}\tau+v(t_0)
+\end{align}
+\end{column}
+\end{columns}
+\end{block}
+
+From the definition of power
+\begin{align*}
+p(t)=v(t)i(t)=Cv(t)\frac{dv(t)}{dt}
+\end{align*}
+or
+\begin{align*}
+p(t)=v(t)i(t)=i(t)\left[\frac{1}{C}\int_{t_0}^{t}i(\tau)\text{d}\tau+v(t_0)\right]
+\end{align*}
+
+\begin{alertblock}{}
+If $p(t)>0$  the capacitor is storing energy. If $p(t)<0$, it means the capacitor is delivering energy to the circuit.
+\end{alertblock}
+
+}
+
+\frame{
+\frametitle{Power and Energy in the Capacitor}
+The energy in the capacitor at any time can be computed as follows:
+\begin{align*}
+p(t)=\frac{d w(t)}{d(t)}\Rightarrow w(t)=\int_{-\infty}^{t} p(t) dt=\int_{-\infty}^{t}  v(t) C\frac{d v(t)}{\cancel{d t}} \cancel{dt}=C\frac{v^2(t)}{2}
+\end{align*}
+
+\begin{exampleblock}{}
+The energy $w(t)$ in the capacitor is always positive!
+\end{exampleblock}
+}
+%
+%\frame{
+%\frametitle{Example (cont.)}
+%
+%The voltage pulse described by the following equations is applied to a $0.5-\mu F$ capacitor: 
+%
+%\begin{align*}
+%v(t)=\left\{
+%\begin{array}{cc}
+%0 & t\leq 0\\
+%4t~V & 0<t\leq 1\\
+%4 e^{-(t-1)}~V & 1<t \leq \infty
+%\end{array}
+%\right.
+%\end{align*}
+%
+%\begin{itemize}
+%\item Derive the expression for the power $p(t)$ and the energy $w(t)$ in the capacitor.
+%\item Specify the interval of time when energy is being stored in the capacitor.
+%\item Specify the interval of time when energy is being delivered by the capacitor.
+%\item Evaluate the integrals 
+%\begin{align*}
+%\int_{0}^{1} p(t) dt \qquad \int_{1}^{\infty} p(t) dt
+%\end{align*}
+%and comment their significance.
+%\end{itemize}
+%
+%}
+
+\frame{
+\frametitle{Capacitors in parallel/series}
+
+\begin{circuitikz} \draw[black]
+(-2,0) to[short,o-] (5,0)
+(-2,2) to[short,o-] (5,2)
+(0,0) to[C=$C_1$] (0,2)
+(2,0) to[C=$C_2$] (2,2)
+(5,0) to[C=$C_N$] (5,2)
+(3,1) node[]{\ldots}
+(7,0)to[C,o-o](7,2)
+(9,1) node[]{$C_{eq}=\sum_{i}C_i$};
+\end{circuitikz}
+\vspace{1.5cm}
+
+\begin{circuitikz} \draw[black]
+(0,0) to[C=$C_1$,o-] (1.5,0)
+to[C=$C_2$] (3,0)
+(4,0) node[]{$\ldots$}
+(5,0) to[C=$C_N$,-o] (6.5,0)
+(8,0)to[C,o-o](10,0)
+(9,1) node[]{$C_{eq}=\left(\sum_{i}\frac{1}{C_i}\right)^{-1}$};
+\end{circuitikz}
+
+
+
+}
+
+
+\section{The Inductor}
+
+\frame{
+\frametitle{The Inductor}
+
+\begin{itemize}
+\item Inductors are circuit elements based on phenomena associated with magnetic fields.
+\item The source of the magnetic field is charge in motion (current).
+\item If the current is varying with time, the magnetic field is varying with time, which induces a voltage in any conductor linked by the field.
+\item The voltage drop across the terminals of the inductor capacitor is proportional to the rate at which  the current varies with time:
+\begin{align}\nn
+v(t)&=L\frac{d i(t)}{d t} \text{ (Fundamental equation of the inductor) }
+%\Rightarrow v(t)&=\int_{-\infty}^{t}\frac{1}{C}i(\tau)\text{d}\tau
+%=v(t_0)+\int_{t_0}^{t}\frac{1}{C}i(\tau)\text{d}\tau
+\end{align}
+\end{itemize}
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[L=$L$,i>=$i$,v=$v$] (2,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{block}{}
+$L$ is called the inductance and it is measured in Henrys (H).
+\end{block}
+\end{column}
+\end{columns}
+
+
+
+}
+
+\frame{
+
+
+
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[L=$L$,i>=$i$,v=$v$] (2,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+v(t)&=L\frac{d i(t)}{d t}
+\end{align}
+\end{column}
+\end{columns}
+
+\begin{alertblock}{Remarks:}
+\begin{enumerate}
+\item If the current across the terminals is constant, the voltage is zero. Thus, \textbf{a capacitor behaves as a short circuit in the presence of a constant current}.
+\item The current cannot change instantaneously across the inductor. Such a change would produce infinite voltage drop across the terminals, physically impossible. For any time $t_0$:
+\begin{align}\nn
+i(t_0^{-})=i(t_0)=i(t_0^{+})
+\end{align}
+\end{enumerate}
+\end{alertblock}
+
+}
+
+\frame{
+\frametitle{The inductor}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[L=$L$,i>=$i$,v=$v$] (2,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+v(t)&=L\frac{d i(t)}{d t}
+\end{align}
+\end{column}
+\end{columns}
+
+
+\vspace{0.5cm}
+\begin{block}{}
+If we know the voltage in the inductor $v(t)$ along  time, we can compute the current $i(t)$ as follows:
+\begin{align}\nn
+i(t)&=\frac{1}{L}\int_{-\infty}^{t}v(\tau)\text{d}\tau=\frac{1}{L}\int_{t_0}^{t}v(\tau)\text{d}\tau+i(t_0)
+\end{align}
+\end{block}
+
+%\begin{exampleblock}{\textbf{Power}}
+%$p(t)=v(t)i(t)=Cv(t)\frac{d v(t)}{d t}\Rightarrow$ $p(t)$ can be positive (we are storing energy) or negative (the energy stored is been given back to the circuit).
+%\end{exampleblock}
+
+
+}
+
+
+\frame{
+\frametitle{Power and Energy in the Inductor}
+\begin{block}{}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[L=$L$,i>=$i$,v=$v$] (2,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.2\textwidth}
+\begin{align}\nn
+v(t)&=L\frac{d i(t)}{d t}
+\end{align}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+i(t)&=\frac{1}{L}\int_{t_0}^{t}v(\tau)\text{d}\tau+i(t_0)
+\end{align}
+\end{column}
+\end{columns}
+\end{block}
+
+From the definition of power
+\begin{align*}
+p(t)=v(t)i(t)=Li(t)\frac{di(t)}{dt}
+\end{align*}
+or
+\begin{align*}
+p(t)=v(t)i(t)=v(t)\left[\frac{1}{L}\int_{t_0}^{t}v(\tau)\text{d}\tau+i(t_0)\right]
+\end{align*}
+
+\begin{alertblock}{}
+If $p(t)>0$  the inductor is storing energy. If $p(t)<0$, it means the inductor is delivering energy to the circuit.
+\end{alertblock}
+
+}
+
+\frame{
+\frametitle{Power and Energy in the Inductor}
+The energy in the inductor at any time can be computed as follows:
+\begin{align*}
+p(t)=\frac{d w(t)}{d(t)}\Rightarrow w(t)=\int_{-\infty}^{t} p(t) dt=\int_{-\infty}^{t}  i(t) L\frac{i v(t)}{\cancel{d t}} \cancel{dt}=L\frac{i^2(t)}{2}
+\end{align*}
+
+\begin{exampleblock}{}
+The energy $w(t)$ in the inductor is always positive!
+\end{exampleblock}
+}
+
+
+\frame{
+\frametitle{Inductors in parallel/series}
+
+\begin{circuitikz} \draw[black]
+(-2,0) to[short,o-] (5,0)
+(-2,2) to[short,o-] (5,2)
+(0,0) to[L=$L_1$] (0,2)
+(2,0) to[L=$L_2$] (2,2)
+(5,0) to[L=$L_N$] (5,2)
+(3,1) node[]{\ldots}
+(7,0)to[L,o-o](7,2)
+(9,1) node[]{$L_{eq}=\left(\sum_{i}\frac{1}{L_i}\right)^{-1}$};
+\end{circuitikz}
+\vspace{1.5cm}
+
+\begin{circuitikz} \draw[black]
+(0,0) to[L=$L_1$,o-] (1.5,0)
+to[L=$L_2$] (3,0)
+(4,0) node[]{$\ldots$}
+(5,0) to[L=$L_N$,-o] (6.5,0)
+(8,0)to[L,o-o](10,0)
+(9,1) node[]{$L_{eq}=\sum_{i}L_i$};
+\end{circuitikz}
+
+
+
+}
+%
+%\frame{
+%\frametitle{Example}
+%The independent current source in the circuit shown generates zero current for $t<0$ and a pulse $i(t)=10 t \text{e}^{-5t}$.
+%
+%\begin{center}
+%\vspace{0.5cm}
+%\begin{circuitikz} \draw[black]
+%(0,0) to[I=$i(t)$]  (0,2)
+%to[short](2,2)
+%to[L=$100mH$,v=$v(t)$] (2,0)
+%to[short] (0,0);
+%\end{circuitikz}
+%\end{center}
+%
+%
+%\begin{itemize}
+%\item Sketch the current waveform (computing the derivative w.r.t. helps).
+%\item At what instant of time is the current maximum?
+%\item Express the voltage $v(t)$ across the terminals of the 100-mH inductor as a function of time.
+%\item Sketch the voltage waveform. At what instant does $v(t)$ change polarity?
+%\end{itemize}
+%
+%}
+%
+%\frame{
+%\frametitle{Example (cont.)}
+%The independent current source in the circuit shown generates zero current for $t<0$ and a pulse $i(t)=10 t \text{e}^{-5t}$.
+%
+%\begin{center}
+%\vspace{0.5cm}
+%\begin{circuitikz} \draw[black]
+%(0,0) to[I=$i(t)$]  (0,2)
+%to[short](2,2)
+%to[L=$100mH$,v=$v(t)$] (2,0)
+%to[short] (0,0);
+%\end{circuitikz}
+%\end{center}
+%
+%
+%\begin{itemize}
+%\item Plot the power $p(t)$ and energy $w(t)$ in the inductor along time.
+%\item In what time interval is energy being stored in the inductor?
+%\item In what time interval is energy being extracted from the inductor?
+%\item What is the maximum energy stored in the inductor?
+%\item Evaluate the integrals
+%\begin{align*}
+%\int_{0}^{0.2} p(t) dt \qquad \int_{0.2}^{\infty} p(t) dt
+%\end{align*}
+%and comment on their significance.
+%\end{itemize}
+%
+%}
+%
+
+
+
+%
+%\section{RL circuits}
+%
+%
+%\frame{
+%\begin{itemize}
+%\item We are now in a position to determine the currents and voltages that arise when energy is either released or acquired by an Inductor in response to abrupt change in a constant voltage or current source.
+%\item We now focus on the RL circuit: a single inductor, a resistor network and a source.
+%\end{itemize}
+%
+%
+%
+%\begin{center}
+%\begin{circuitikz}[] \draw[black]
+%(-2,0) to[I=$I_s$] (-2,2)
+%to[short](-0.5,2)
+%(-0.5,0) to[R=$R_s$] (-0.5,2)
+%to[switch] (2,2)
+%to[L=$L$,i>=$i_L$] (2,0)
+%(2,2) to[switch] (4,2)
+%to[R=$R$] (4,0)
+%to[short] (-2,0);
+%%(6,0) to[V=$V_s$] (6,2)
+%%to[switch] (8,2)
+%%to[C=$C$] (8,0)
+%%(8,2) to[short] (10,2)
+%%to[R=$R$] (10,0)
+%%to[short] (6,0)
+%%%(2,3) node[] {$t<t_0$}
+%%%(8,3) node[] {$t\geq t_0$}
+%%(6,0) node[ground] {}
+%%(8,2.25) node[] {A};
+%\end{circuitikz}
+%\end{center}
+%
+%}
+%
+%
+%\frame{
+%We divide our analysis in two steps:
+%\begin{enumerate}
+%\item We consider the currents and voltages that arise when stored energy in an inductor is suddenly released to a resistive network. This is called the \textbf{natural response} of the circuit.
+%\item Then we consider the currents and voltages that aires when energy is being acquired by the inductor due to a sudden application of a constant voltage or current source. This is called the \textbf{natural response} of the circuit.
+%\end{enumerate}
+%
+%
+%\begin{columns}
+%\begin{column}{0.3\textwidth}
+%\begin{center}
+%\begin{center}
+%\begin{circuitikz} \draw[black]
+%(2,2) to[L=$L$,i>=$i_L$] (2,0)
+%(2,2) to[cspst=$t_0$] (4,2)
+%to[R=$R$] (4,0)
+%to[short] (2,0)
+%(3,3) node[] {$i_L(t_0^{-})=I_0$}
+%(3,-1) node[]{\textbf{Natural response.}};
+%\end{circuitikz}
+%\end{center}
+%\end{center}\end{column}
+%\begin{column}{0.7\textwidth}
+%\begin{center}
+%\begin{circuitikz}[] \draw[black]
+%(-2,0) to[I=$I_s$] (-2,2)
+%to[short](-0.5,2)
+%(-0.5,0) to[R=$R_s$] (-0.5,2)
+%to[cspst=$t_0$] (2,2)
+%to[L=$L$,i>=$i_L$] (2,0)
+%(2,2) to[short] (4,2)
+%to[R=$R$] (4,0)
+%to[short] (-2,0)
+%(1,3) node[] {$i_L(t_0^{-})=0$}
+%(1,-1) node[]{\textbf{Step response.}};
+%%(6,0) to[V=$V_s$] (6,2)
+%%to[switch] (8,2)
+%%to[C=$C$] (8,0)
+%%(8,2) to[short] (10,2)
+%%to[R=$R$] (10,0)
+%%to[short] (6,0)
+%%%(2,3) node[] {$t<t_0$}
+%%%(8,3) node[] {$t\geq t_0$}
+%%(6,0) node[ground] {}
+%%(8,2.25) node[] {A};
+%\end{circuitikz}
+%\end{center}
+%
+%\end{column}
+%\end{columns}
+%
+%
+%
+%}
+%
+%
+%\frame{
+%\frametitle{Natural response of the RL circuit}
+%
+%For simplicity, we close the switch at $t_0=0$ s. 
+%\begin{center}
+%\begin{circuitikz} \draw[black]
+%(2,2) to[L=$L$,i>=$i_L$,v<=$V_L$] (2,0)
+%(2,2) to[cspst=$t_0$] (4,2)
+%to[R=$R$] (4,0)
+%to[short] (2,0)
+%(3,3) node[] {$i_L(t_0^{-})=I_0$}
+%(3,-1) node[]{\textbf{Natural response.}};
+%\end{circuitikz}
+%\end{center}
+%
+%\textbf{Kirchhoff's voltage law ($t\geq0$):}
+%\begin{align}\nn
+%V_L(t)+i_LR=0\Rightarrow i_L R+L\frac{di_L(t)}{dt}=0
+%\end{align}
+%}
+%
+%\frame{
+%\frametitle{Natural response of the RL circuit}
+%
+%The differential equation can be simply compute using the variable separation method:
+%\begin{align}\nn
+%i_L R+L\frac{di_L(t)}{dt}=0 
+%\end{align}
+%%
+%%Integrating at both sides
+%%\begin{align}\nn
+%%&\int_{V_C(0)}^{V_C(t)} -\frac{dx}{x}=\frac{1}{RC}\int_{0}^{t} dy\Rightarrow \log(\frac{V_C(0)}{V_C(t)})=\frac{1}{RC}t
+%%\end{align}
+%%Therefore
+%\begin{exampleblock}{Current through the Inductor}
+%\begin{align}\nn
+%i_L(t)=i_L(0)\text{e}^{-\frac{R}{L}t}=I_0\text{e}^{-\frac{R}{L}t}\quad t\geq 0
+%\end{align}
+%\end{exampleblock}
+%
+%\begin{block}{Voltage in the Inductor}
+%\begin{align}\nn
+%V_L(t)=L\frac{d i(t)}{d t}=-I_0R\text{e}^{-\frac{R}{L}t}
+%\end{align}
+%\end{block}
+%
+%}
+%
+%
+%\frame{
+%\frametitle{Step response of the RC circuit}
+%
+%\begin{center}
+%\begin{circuitikz}[] \draw[black]
+%(-2,0) to[I=$I_s$] (-2,2)
+%to[short](-0.5,2)
+%(-0.5,0) to[R=$R_s$,i<=$i_{R_s}$] (-0.5,2)
+%to[cspst=$t_0$] (2,2)
+%to[L=$L$,i>=$i_L$,v<=$V_L$] (2,0)
+%(2,2) to[short] (4,2)
+%to[R=$R$,i>=$i_R$] (4,0)
+%to[short] (-2,0)
+%(1,3) node[] {$i_L(t_0^{-})=0$}
+%(1,-1) node[]{\textbf{Step response.}};
+%\end{circuitikz}
+%\end{center}
+%
+%\begin{align}\nn
+%&I_s=i+i_{R_s}+i_L+i_R\Rightarrow I_s=\frac{V_L}{R_s}+i_L+\frac{V_L}{R}\\\nn
+%&I_s=\frac{1}{R_s}L\frac{di_L(t)}{dt}+i_L+\frac{1}{R}L\frac{di_L(t)}{dt}=L(R^{-1}_s+R^{-1})\frac{di_L(t)}{dt}+i_L
+%\end{align}
+%
+%}
+%
+%\frame{
+%Define $R_{eq}=(R_s^{-1}+R^{-1})^{-1}$, we solve the differential equation by variable separation:
+%\begin{align}\nn
+%&I_s=L(R^{-1}_s+R^{-1})\frac{di_L(t)}{dt}+i_L\\\nn
+%&\frac{di_L(t)}{dt}=\frac{R_{eq}(I_s-i_L)}{L}\Rightarrow \frac{R_{eq}di_L(t)}{L(I_s-i_L)}=dt\\\nn
+%&\int_{i_L(t_0)}^{i_L(t)}\frac{dx}{(I_s-x)}=\frac{R_{eq}}{L}\int_{t_0}^{t}dy
+%\end{align}
+%
+%\begin{exampleblock}{Current through the Inductor}
+%\begin{align}\nn
+%i_L(t)=I_s\left(1-\text{e}^{-\frac{R_{eq}}{L}t}\right)
+%\end{align}
+%\end{exampleblock}
+%
+%}
+%
+%
+%
+%\frame{
+%\begin{exampleblock}{Voltage in the inductor}
+%\begin{align}\nn
+%V_L(t)&=L\frac{di_L(t)}{dt}=I_sR_{eq}\text{e}^{-\frac{R_{eq}}{L}t}
+%\end{align}
+%\end{exampleblock}
+%\begin{block}{Current through resistors $R$ and $R_s$}
+%\begin{align}\nn
+%i_R(t)=\frac{V_L(t)}{R}=I_s\frac{R_{eq}}{R}\text{e}^{-\frac{R_{eq}}{L}t}\\\nn
+%i_{R_s}(t)=\frac{V_L(t)}{R_s}=I_s\frac{R_{eq}}{R}\text{e}^{-\frac{R_{eq}}{L}t}
+%\end{align}
+%\end{block}
+%
+%}
+%
+%\section{General solution to a first order linear differential equation}
+%
+%\frame{
+%Compute $x(t)$ such that $x(t_0)=x_0$ if 
+%\begin{align}\nn
+%A\frac{dx(t)}{dt}+Bx(t)=C
+%\end{align}
+%
+%
+%\begin{exampleblock}{Sol.}
+%\begin{align}\nn
+%x(t)=\frac{C}{B}\left(1-\text{e}^{-\frac{B}{A}(t-t_0)}\right)+x_0\text{e}^{-\frac{B}{A}(t-t_0)}
+%\end{align}
+%\end{exampleblock}
+%}
+
+\end{document}

@@ -1,0 +1,45 @@
+\BOOKMARK [1][]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][]{section.2}{Change Log}{}% 2
+\BOOKMARK [1][]{section.3}{Macros}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{\134psaxeslabels}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{\134pstick}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{\134psTick}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{\134pssignal}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.5}{\134psstem}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.6}{\134pszero}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.7}{\134pspole}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.8}{\134pscircleop}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.9}{\134psframeop}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.10}{\134psdisk}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.11}{\134psring}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.12}{\134psdiskc}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.13}{\134psldots}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.14}{\134ldotsnode}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.15}{\134psblock}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.16}{\134psfblock}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.17}{\134psadaptive}{section.3}% 20
+\BOOKMARK [2][-]{subsection.3.18}{\134psknob}{section.3}% 21
+\BOOKMARK [2][-]{subsection.3.19}{\134psusampler}{section.3}% 22
+\BOOKMARK [2][-]{subsection.3.20}{\134psdsampler}{section.3}% 23
+\BOOKMARK [2][-]{subsection.3.21}{\134nclist}{section.3}% 24
+\BOOKMARK [2][-]{subsection.3.22}{\134ncstar}{section.3}% 25
+\BOOKMARK [1][]{section.4}{Extras}{}% 26
+\BOOKMARK [2][-]{subsection.4.1}{New Styles}{section.4}% 27
+\BOOKMARK [2][-]{subsection.4.2}{Brace Macros}{section.4}% 28
+\BOOKMARK [2][-]{subsection.4.3}{Golden Ratio}{section.4}% 29
+\BOOKMARK [2][-]{subsection.4.4}{Frame Width and Height}{section.4}% 30
+\BOOKMARK [2][-]{subsection.4.5}{Fill Color}{section.4}% 31
+\BOOKMARK [1][]{section.5}{Examples}{}% 32
+\BOOKMARK [2][-]{subsection.5.1}{Complex Number}{section.5}% 33
+\BOOKMARK [2][-]{subsection.5.2}{Plotting}{section.5}% 34
+\BOOKMARK [2][-]{subsection.5.3}{Sampling}{section.5}% 35
+\BOOKMARK [2][-]{subsection.5.4}{Pole-Zero Diagram}{section.5}% 36
+\BOOKMARK [2][-]{subsection.5.5}{Butterworth Filter}{section.5}% 37
+\BOOKMARK [2][-]{subsection.5.6}{Region of Convergence}{section.5}% 38
+\BOOKMARK [2][-]{subsection.5.7}{Block Diagrams}{section.5}% 39
+\BOOKMARK [2][-]{subsection.5.8}{C/D Converter}{section.5}% 40
+\BOOKMARK [2][-]{subsection.5.9}{Direct Form II}{section.5}% 41
+\BOOKMARK [2][-]{subsection.5.10}{Filter Bank}{section.5}% 42
+\BOOKMARK [2][-]{subsection.5.11}{System Identification}{section.5}% 43
+\BOOKMARK [2][-]{subsection.5.12}{Adaptive Linear Combiner}{section.5}% 44
+\BOOKMARK [1][]{section.6}{Pruebas Pablo}{}% 45

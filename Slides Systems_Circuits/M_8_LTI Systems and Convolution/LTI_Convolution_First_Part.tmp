@@ -1,0 +1,14 @@
+% LTI_Convolution_First_Part.top
+\unprotect
+\def\MPOSTformatswitch{-progname=metafun -mem=}
+\setupsystem[\c!n=1,\c!m=1]
+\setupsystem[\c!method=2]
+\setupsystem[\c!type=linux]
+\setupsystem[\c!random=1427]
+\setupsystem[inputfile=LTI_Convolution_First_Part.tex]
+\startsetups *runtime:options
+\setupoutput[pdftex]
+\stopsetups
+\startsetups *runtime:modules
+\stopsetups
+\protect \endinput

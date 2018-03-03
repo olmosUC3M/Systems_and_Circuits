@@ -1,0 +1,588 @@
+\documentclass[10pt,makeidx]{beamer}
+\mode<presentation>
+{
+ \usetheme{Boadilla}
+\pagestyle{empty}
+
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamerfont*{block}{size=\normalsize,series=\bfseries}
+%\setbeamertemplate{blocks}[rounded][shadow=true]
+}
+
+\usepackage{etex}
+% \usepackage{helvet}
+\usepackage{amsmath, amssymb}
+\usepackage{color}
+%\usepackage{asymptote}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{makeidx}
+\usepackage{multido}
+\usepackage{adjustbox}
+
+\usepackage{pst-sigsys,pst-plot,pstricks-add}
+\usepackage{pst-pdf}
+
+\usepackage[american voltages, american currents,siunitx]{circuitikz}
+%\sisetup{load=derived} % loading \siemens
+
+
+\makeatletter
+% create the shape
+\pgfcircdeclarebipole{}{\ctikzvalof{bipoles/interr/height 2}}{spst}{\ctikzvalof{bipoles/interr/height}}{\ctikzvalof{bipoles/interr/width}}{
+
+    \pgfsetlinewidth{\pgfkeysvalueof{/tikz/circuitikz/bipoles/thickness}\pgfstartlinewidth}
+
+    \pgfpathmoveto{\pgfpoint{\pgf@circ@res@left}{0pt}}
+    \pgfpathlineto{\pgfpoint{.6\pgf@circ@res@right}{\pgf@circ@res@up}}
+    \pgfusepath{draw}   
+}
+
+% make the shape accessible with nice syntax
+\def\pgf@circ@spst@path#1{\pgf@circ@bipole@path{spst}{#1}}
+\tikzset{switch/.style = {\circuitikzbasekey, /tikz/to path=\pgf@circ@spst@path, l=#1}}
+\tikzset{spst/.style = {switch = #1}}
+\makeatother
+
+
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\def\nn{\nonumber}
+\def\V{\mathbf{V}}
+\def\I{\mathbf{I}}
+\def\Z{\mathbf{Z}}
+\def\e{\text{e}}
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\newcommand{\fs}[2]{#2}
+
+%\title[]{Sinusoidal Steady-State Analysis}
+%\author[\textcolor{blue}{}]{\textcolor{violet}{System and Circuits. Topic-3: Electric Circuits}\\\vspace*{3mm}\textsf{{\small \textcolor{blue}{UC3M}}}
+%}
+%\date[07/04/2013]{{\small 07/04/2013}}
+%\institute{\textcolor{white}{olmos@tsc.uc3m.es}}
+
+
+
+
+\title[]{Sinusoidal Steady-State Analysis}
+\author[\textcolor{blue}{Systems and Circuits}]{\textcolor{darkblue}{Pablo M. Olmos} (olmos@tsc.uc3m.es)\\ \textcolor{darkblue}{Emilio Parrado} (emipar@tsc.uc3m.es)}
+\institute{\textcolor{white}{UC3M}}
+
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.40}
+\setbeamercolor{title}{fg=darkblue}
+\setbeamercolor{frametitle}{fg=darkblue}
+\definecolor{darkgreen}{rgb}{0.0, 0.4, 0.0}
+
+
+
+
+%\logo{\includegraphics[scale=0.2]{Figures/uc3m-logo.pdf}}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Index}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+\frame{
+\titlepage
+\thispagestyle{empty}
+\begin{center}
+\includegraphics[scale=0.05]{Figures/uc3m-logo.pdf}
+\end{center}
+}
+
+\section{Introduction}
+
+\frame{
+\frametitle{Sinusoidal Steady-State Analysis, why?}
+\begin{itemize}
+\item Thus far, we have focused on circuits with constant sources. 
+\item We are interested now in sources for which the value of the voltage or current varies sinusoidally.
+\item Important area of study for several reasons:
+\end{itemize}
+
+\begin{block}{}
+\begin{enumerate}
+\item The generation, transmission, distribution and consumption of electric energy occur under essentially sinusoidal steady-sate conditions.
+\item An understanding of sinusoidal behavior makes it possible to predict the behavior of circuits with non-sinusoidal sources.
+\item Steady-state sinusoidal behavior often simplifies the design of electrical systems. 
+\end{enumerate}
+\end{block}
+
+
+}
+
+
+\frame{
+\frametitle{The sinusoidal source}
+
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[sV=$v(t)$] (0,2);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+v(t)=V_m\cos(\omega t+\phi).
+\end{align}
+\end{column}
+\end{columns}
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[sI=$i(t)$] (0,2);
+\end{circuitikz}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+i(t)=I_m\cos(\omega t+\phi).
+\end{align}
+\end{column}
+\end{columns}
+
+\begin{exampleblock}{}
+\begin{itemize}
+\item $V_m$ ($I_m)$ the amplitude.
+\item $\omega$ is the angular frequency (rads/s). 
+\item $T=\frac{2\pi}{\omega}$ is the period (seconds).
+\item $\phi$  is the phase angle (rads).
+\end{itemize}
+\end{exampleblock}
+
+
+}
+
+\section{The sinusoidal response}
+
+\frame{
+\frametitle{The sinusoidal response: inductor}
+\begin{align}\nn
+v(t)=V_m\cos(\omega t+\phi).
+\end{align}
+
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[sV=$v(t)$] (0,2)
+to[cspst](2,2)
+to[R=$R$,i>=$i(t)$] (4,2)
+to[L=$L$](4,0)
+to[short] (0,0)
+(1,2.5) node[]{$t=0$};
+\end{circuitikz}
+\end{center}
+
+It can be proved that, for $t\rightarrow\infty$ (Sinusoidal Steady-State)
+\begin{align}\nn
+\lim_{t\rightarrow\infty} i(t)=\frac{V_m}{\sqrt{R^2+\omega^2L}}\cos(\omega t+\phi-\theta)\qquad \theta=\arctan(\frac{\omega L}{R}).
+\end{align}
+
+
+}
+
+\frame{
+
+\begin{exampleblock}{}
+\begin{align}\nn
+i(t)=\frac{V_m}{\sqrt{R^2+\omega^2L}}\cos(\omega t+\phi-\theta)\qquad \theta=\arctan(\frac{\omega L}{R}).
+\end{align}
+\end{exampleblock}
+
+\begin{itemize}
+\item $i(t)$ is also a sinusoidal function.
+\item $i(t)$ has the same frequency that $v(t)$.
+\item $i(t)$ and $v(t)$ only differ in the amplitude and the phase angle.
+\end{itemize}
+
+
+}
+
+
+\frame{
+\frametitle{The sinusoidal response: capacitor}
+\begin{align}\nn
+v(t)=V_m\cos(\omega t+\phi).
+\end{align}
+
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[sV=$v(t)$] (0,2)
+to[cspst](2,2)
+to[R=$R$,i>=$i(t)$] (4,2)
+to[C=$C$](4,0)
+to[short] (0,0)
+(1,2.5) node[]{$t=0$};
+\end{circuitikz}
+\end{center}
+
+It can be proved that, for $t\rightarrow\infty$ (Sinusoidal Steady-State)
+\begin{align}\nn
+\lim_{t\rightarrow\infty} i(t)=\frac{V_m}{\sqrt{R^2+\frac{1}{(\omega C)^2}}}\cos(\omega t+\phi+\theta)\qquad \theta=\arctan(\frac{1}{\omega RC}).
+\end{align}
+
+
+}
+
+\frame{
+\frametitle{The capacitor sinusoidal response (II)}
+
+\begin{exampleblock}{}
+\begin{align}\nn
+i(t)=\frac{V_m}{\sqrt{R^2+\frac{1}{(\omega C)^2}}}\cos(\omega t+\phi+\theta)\qquad \theta=\arctan(\frac{1}{\omega RC}).
+\end{align}
+\end{exampleblock}
+
+\begin{itemize}
+\item $i(t)$ is also a sinusoidal function.
+\item $i(t)$ has the same frequency that $v(t)$.
+\item $i(t)$ and $v(t)$ only differ in the amplitude and the  phase angle.
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{Sinusoidal Steady-State Analysis of passive circuits}
+
+\begin{itemize}
+\item Sinusoidal sources (all at the same frequency $\omega$).
+\item Resistors, capacitors and inductors.
+\item All magnitudes in the circuit vary according to a sinusoidal function!
+\item \textbf{\textcolor{red}{We only have to compute the  amplitude and  phase angle of each voltage/current!}} 
+\item We use the \textbf{phasor method}.
+\end{itemize}
+
+
+
+
+
+}
+
+\section{The phasor method}
+
+\frame{
+\frametitle{The phasor}
+
+\begin{block}{}
+The phasor is a complex number that carries the amplitude and phase angle information about a sinusoidal function.
+\end{block}
+
+\begin{align}\nn
+v(t)&=V_m\cos(\omega t+\phi)\Rightarrow \V=V_m\e^{j\phi}\\\nn\\\nn
+i(t)&=I_a\cos(\omega t+\phi-\theta) \Rightarrow \I=I_a\e^{j(\phi-\theta)}\\\nn\\\nn
+i(t)&=I_a\sin(\omega t+\phi)=I_a\cos(\omega t+\phi-\frac{\pi}{2}) \Rightarrow \I=I_a\e^{j(\phi-\frac{\pi}{2})}\\\nn\\\nn
+%i(t)=\frac{V_m}{\sqrt{R^2+\frac{1}{(\omega C)^2}}}\cos(\omega t+\phi+\theta)& \Rightarrow \I=\frac{V_m}{\sqrt{R^2+\frac{1}{(\omega C)^2}}}\e^{j(\phi+\theta)}
+\end{align}
+
+}
+
+\frame{
+\frametitle{The resistor in the Sinusoidal Steady-State regime}
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,2) to[R=$R$,i>=\mbox{$i(t)=I_m\cos(\omega t+\phi)$},v_=$v(t)$] (0,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+By Ohm's Law
+\begin{align}\nn
+v(t)=Ri(t)=R I_m \cos(\omega t+\phi).
+\end{align}
+\end{column}
+\end{columns}
+
+\vspace{1cm}
+Therefore, in terms of their respective phasors:
+
+\begin{exampleblock}{}
+\begin{align}\nn
+\V=R\I=R I_m \e^{j\phi}
+\end{align}
+\end{exampleblock}
+
+}
+
+
+\frame{
+\frametitle{The Inductor in the Sinusoidal Steady-State regime}
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,2) to[L=$L$,i>=\mbox{$i(t)=I_m\cos(\omega t+\phi)$},v_=$v(t)$] (0,0);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+v(t)=L\frac{di(t)}{dt}&=-\omega L I_m \sin(\omega t+\phi)\\\nn
+&=-\omega L I_m \cos(\omega t+\phi-\frac{\pi}{2})
+\end{align}
+\end{column}
+\end{columns}
+\vspace{0.5cm}
+
+Therefore, in terms of their respective phasors:
+
+\begin{exampleblock}{}
+\begin{align}\nn
+\V=j\omega L \I
+\end{align}
+\end{exampleblock}
+
+\begin{alertblock}{}
+If we treat an inductor as a generalized resistor (called \textbf{impedance}) with value $\Z=j\omega L$, Ohm's law applies in the usual form for the phasors: $\V=\Z\I$.
+\end{alertblock}
+
+}
+
+\frame{
+\frametitle{The Capacitor in the Sinusoidal Steady-State regime}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[C=$C$,i<=$i(t)$,v>=\mbox{$v(t)=V_m\cos(\omega t+\phi)$}] (0,2);
+\end{circuitikz}
+\end{center}\end{column}
+\begin{column}{0.5\textwidth}
+\begin{align}\nn
+i(t)=C\frac{dv(t)}{dt}&=-\omega C V_m \sin(\omega t+\phi)\\\nn
+&=-\omega C V_m \cos(\omega t+\phi-\frac{\pi}{2}).
+\end{align}
+\end{column}
+\end{columns}
+\vspace{0.5cm}
+
+Therefore, in terms of their respective phasors:
+
+\begin{exampleblock}{}
+\begin{align}\nn
+\I=j\omega C \V\Rightarrow \V=\frac{1}{j\omega C}\I.
+\end{align}
+\end{exampleblock}
+
+\begin{alertblock}{}
+If we treat the capacitor as a generalized resistor (called \textbf{impedance}) with value $\Z=\frac{1}{j\omega C}$, Ohm's law applies in the usual form for the phasors: $\V=\Z\I$.
+\end{alertblock}
+
+}
+
+\frame{
+\frametitle{Analysis of passive circuits in the Sinusoidal Steady-State regime}
+
+\begin{itemize}
+\item All the magnitudes of interest are sinusoidal of the same frequency $\omega$.
+\item They are represented by phasors.
+\item Resistors, inductors and capacitors are regarded as generalized resistors, called impedances, with respective values: $\Z_R=R$, $\Z_L=j\omega L$ and $\Z_C=\frac{1}{j\omega C}$. We measure impedance also in Ohms $\Omega$.
+\item Ohm's law: $\V=\Z\I$. 
+\item Although we don't prove it, \textbf{Kirchhoff's laws are also valid for phasors}.
+\end{itemize}
+
+\begin{block}{}
+Passive circuits in the Sinusoidal Steady-State regime are analyzed using standard techniques: loop current method, voltage node method, Th\'evenin/Norton equivalent, ...
+\end{block}
+
+}
+
+\section{Example one}
+
+\frame{
+Compute $i(t)$ using the phasor method if $v(t)=750\cos(5000 t+\frac{\pi}{6})$.
+\begin{center}
+\begin{circuitikz} \draw[black]
+(0,0) to[sV=$v(t)$] (0,2)
+to[R=$90\Omega$](2,2)
+to[L=$32mH$] (4,2)
+to[C=$5\mu F$,i>=$i(t)$](4,0)
+to[short] (0,0);
+\end{circuitikz}
+\end{center}
+
+\begin{exampleblock}{\textbf{Step 1}}
+Compute the phasor associated to the source and the impedances:
+\begin{itemize}
+\item $v(t)=750\cos(5000 t+\frac{\pi}{6})\Rightarrow \V=750\e^{j\frac{\pi}{6}}$.
+\item Resistor of 90 $\Omega\Rightarrow \Z_1=90 \Omega$.
+\item Inductor of $32mH\Rightarrow \Z_2=j\omega L=j160\Omega$.
+\item Capacitor of $5\mu F\Rightarrow \Z_3=\frac{1}{j\omega C}=-j40\Omega$.
+\end{itemize}
+\end{exampleblock}
+
+}
+
+\frame{
+
+\begin{exampleblock}{\textbf{Step 2}}
+We compute the phasor for the current $i(t)$ working with the phasor circuit.
+\end{exampleblock}
+
+\begin{center}
+\begin{circuitikz}[european resistors] \draw[black]
+(0,0) to[V=$\V$] (0,2)
+to[R=$\Z_1$](2,2)
+to[R=$\Z_2$] (4,2)
+to[R=$\Z_3$,i>=$\I$](4,0)
+to[short] (0,0);
+\end{circuitikz}
+\end{center}
+
+Kirchhoff's voltage law:
+\begin{align}\nn
+&\I\Z_1+\I\Z_2+\I\Z_3-\V=90\I+j160\I-j40\I-\V=0\\\nn
+&\Rightarrow \I=\frac{\V}{90+j120}=\frac{750\e^{j\frac{\pi}{6}}}{90+j120}
+\end{align}
+If we apply that $90+j120=150\e^{j0.927}$, then
+\begin{align}\nn
+\I=\frac{\V}{90+j120}=\frac{750\e^{j\frac{\pi}{6}}}{150\e^{j0.927}}=5\e^{-j0.4} A
+\end{align}
+}
+
+\frame{
+\begin{exampleblock}{\textbf{Step 3}}
+Compute $i(t)$ from its phasor $\I$.
+\end{exampleblock}
+
+\begin{align}\nn
+\I=5\e^{-j0.4}\Rightarrow i(t)=5\cos(5000 t-0.4)
+\end{align}
+
+\begin{alertblock}{Remark! Impedance in series}
+
+\begin{center}
+\begin{circuitikz} [european resistors] \draw[black]
+(0,0) to[V=$\V$] (0,2)
+to[R=$\Z_1$](2,2)
+to[R=$\Z_2$] (4,2)
+to[R=$\Z_3$,i>=$\I$](4,0)
+to[short] (0,0)
+(6,0) to[V=$\V$] (6,2)
+to[short](7,2)
+to[R,i>=$\I$] (7,0)
+to[short] (6,0)
+(9,1) node[]{$\Z_{eq}=\Z_1+\Z_2+\Z_3$};
+\end{circuitikz}
+\end{center}
+
+As with resistors, the \textbf{equivalent impedance} of a set of impedances in series is equal to its sum. 
+
+\end{alertblock}
+
+
+}
+
+\section{Example two}
+
+\frame{
+Compute $v(t),i_1(t), i_2(t)$ and $i_3(t)$ using the phasor method if $i_s(t)=8\cos(\omega t)$, where $\omega=2\times 10^5$ rads/s.
+\begin{center}
+\begin{circuitikz} \draw[black]
+(-1,0) to[sI=$i(t)$] (-1,4)
+(1,4) to[open,v<=$v(t)$] (1,0)
+(2,0) to[R=$10\Omega$,i<=$i_1(t)$] (2,4)
+(4,0) to[L=$40\mu H$,i<=$i_2(t)$] (4,2)
+to [R=$6\Omega$] (4,4)
+(6,0) to [C=$1\mu F$,i<=$i_3(t)$] (6,4)
+to[short](-1,4)
+(6,0) to[short] (-1,0);
+\end{circuitikz}
+\end{center}
+
+
+
+}
+
+\frame{
+
+\begin{center}
+\begin{circuitikz} \draw[black]
+(-1,0) to[sI=$i(t)$] (-1,4)
+(1,4) to[open,v<=$v(t)$] (1,0)
+(2,0) to[R=$10\Omega$,i<=$i_1(t)$] (2,4)
+(4,0) to[L=$40\mu H$,i<=$i_2(t)$] (4,2)
+to [R=$6\Omega$] (4,4)
+(6,0) to [C=$1\mu F$,i<=$i_3(t)$] (6,4)
+to[short](-1,4)
+(6,0) to[short] (-1,0);
+\end{circuitikz}
+\end{center}
+
+\begin{exampleblock}{\textbf{Step 1}}
+Compute the phasor associated to the source and the corresponding impedances:
+\begin{itemize}
+\item $i_s(t)=8\cos(\omega t)\Rightarrow \V=8\e^{j0}=8$.
+\item Resistor of 10 $\Omega\Rightarrow \Z_1=10 \Omega$.
+\item Resistor in series with Inductor of $4\mu H\Rightarrow \Z_2=6+j\omega L=6+j8\Omega$.
+\item Capacitor of $1\mu F\Rightarrow \Z_3=\frac{1}{j\omega C}=-j5\Omega$.
+\end{itemize}
+\end{exampleblock}
+
+
+}
+
+\frame{
+
+\begin{exampleblock}{\textbf{Step 2}}
+We work with the phasor circuit.
+\end{exampleblock}
+
+
+\begin{center}
+\begin{circuitikz}[european resistors] \draw[black]
+(-1,0) to[I=$\I$] (-1,2)
+(1,2) to[open,v<=$\V$] (1,0)
+(2,0) to[R=$10\Omega$,i<=$\I_1(t)$] (2,2)
+(4,0) to[R=$6+j8\Omega$,i<=$\I_2(t)$,-*] (4,2)
+(6,0) to [R=$-5j\Omega$,i<=$\I_3(t)$] (6,2)
+to[short](-1,2)
+(6,0) to[short] (-1,0)
+(4,2.5) node[] {$A$};
+\end{circuitikz}
+\end{center}
+
+Kirchhoff's current law in node $A$:
+\begin{align}\nn
+\I=\I_1+\I_2+\I_3=\frac{\V}{\Z_1}+\frac{\V}{\Z_2}+\frac{\V}{\Z_3}=\frac{\V}{\Z_{eq}}.
+\end{align}
+The equivalent impedance of the set of three impedances in parallel is 
+\begin{align}
+\Z_{eq}=\left(\frac{1}{\Z_1}+\frac{1}{\Z_2}+\frac{1}{\Z_3}\right)^{-1},
+\end{align}
+i.e., the same as with simple resistors!!
+}
+
+\frame{
+
+\begin{align}\nn
+\Z_{eq}=&\left(\frac{1}{10}+\frac{1}{6+8j}+\frac{1}{-5j}\right)^{-1}=\left(0.1+\frac{6-8j}{100}+0.2j\right)^{-1}\\\nn&=\left(0.2\e^{j0.64}\right)^{-1}
+=5\e^{-j0.64}.
+\end{align}
+Therefore
+\begin{align}\nn
+\V&=\Z_{eq}\I=40\e^{-j0.64}\rightarrow v(t)=40\cos(\omega t -0.64)\\\nn\\\nn
+\I_1&=\frac{\V}{\Z_1}=4\e^{-j0.64}\rightarrow i_1(t)=4\cos(\omega t -0.64)\\\nn\\\nn
+\I_2&=\frac{\V}{\Z_2}=\frac{40\e^{-j0.64}}{6+j8}=\frac{40\e^{-j0.64}}{10\e^{j0.927}}\approx 4\e^{-j0.5\pi}\rightarrow i_2(t)=4\cos(\omega t -0.5\pi)\\\nn\\\nn
+\I_3&=\frac{\V}{\Z_3}=\frac{40\e^{-j0.64}}{-5j}=\frac{40\e^{-j0.64}}{5\e^{-j0.5\pi}}=8\e^{j0.932}\rightarrow i_3(t)=8\cos(\omega t+0.93).
+\end{align}
+
+}
+
+
+
+\end{document}

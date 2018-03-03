@@ -1,0 +1,3 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Properties of LTI Systems}{2}{0}{1}
+\beamer@sectionintoc {2}{The unit step response of an LTI systems}{11}{0}{2}
