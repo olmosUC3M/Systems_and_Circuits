@@ -9,7 +9,9 @@ This material has been created by
 
 and it is distributed under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-Any feedback is greatly appreciated!
+Any feedback is greatly appreciated! Also, if you find typos and errors, pull any modification request you believe should be added or corrected. 
+
+
 
 
 
