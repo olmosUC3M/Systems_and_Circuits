@@ -13,7 +13,8 @@ We provide the [LaTeX](https://www.latex-project.org/) source code for the slide
 8. LTI systems and the convolution operation
 9. Properties of LTI Systems
 10. Capacitance & Inductance
-11. RC, RL and RLC circuits
+11. RC, RL circuits
+12. RLC circuits. Linearity, Causality and Time-invariancy.
 12. Sinosuidal Steady-State Analysis
 
 
