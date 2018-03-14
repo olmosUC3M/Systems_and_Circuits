@@ -1,0 +1,3 @@
+\beamer@sectionintoc {1}{General solution of the Second-order differential equation}{2}{0}{1}
+\beamer@sectionintoc {2}{RLC circuits}{17}{0}{2}
+\beamer@sectionintoc {3}{RLC circuits as systems (filters)}{29}{0}{3}
