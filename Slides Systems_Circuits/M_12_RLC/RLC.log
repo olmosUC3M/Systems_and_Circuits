@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.23)  14 MAR 2018 12:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.23)  14 MAR 2018 12:08
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -699,13 +699,16 @@ Package: etex 2016/08/01 v2.7 eTeX basic definition package (PEB,DPC)
 )
 (./asymptote.sty
 Package: asymptote 2012/08/25 v1.27 Asymptote style file for LaTeX
+ (./RLC.pre)
 \ASYbox=\box53
 \c@asy=\count155
 \AsyStream=\write5
 \AsyPreStream=\write6
- (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ifthen.sty
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-) (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/catchfile.sty
+)
+(/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/catchfile.sty
 Package: catchfile 2016/05/16 v1.7 Catch the contents of a file (HO)
 )
 \openout6 = `RLC.pre'.
@@ -1419,7 +1422,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 63.
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\\' on input line 67.
 
-No file RLC.aux.
+(./RLC.aux)
 \openout1 = `RLC.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
@@ -1436,6 +1439,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
 LaTeX Font Info:    ... okay on input line 83.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 83.
 LaTeX Font Info:    ... okay on input line 83.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1498,6 +1502,8 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 83.
 LaTeX Info: Redefining \pageref on input line 83.
 LaTeX Info: Redefining \nameref on input line 83.
+
+(./RLC.out) (./RLC.out)
 \@outlinefile=\write8
 \openout8 = `RLC.out'.
 
@@ -1585,11 +1591,10 @@ Preview: PDFoutput 1
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2017/05/19 v2.7g siunitx: Abbreviated units
-)
-No file RLC.nav.
+) (./RLC.nav)
 \c__siunitx_mathsf_int=\count350
 LaTeX Font Info:    Try loading font information for U+msa on input line 83.
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 83.
@@ -1610,7 +1615,7 @@ File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
 )
 \c__siunitx_mathtt_int=\count351
- <Figures/uc3m-logo.pdf, id=14, 739.76375pt x 223.83624pt>
+ <Figures/uc3m-logo.pdf, id=26, 739.76375pt x 223.83624pt>
 File: Figures/uc3m-logo.pdf Graphic file (type pdf)
 
 <use Figures/uc3m-logo.pdf>
@@ -1623,9 +1628,7 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/upd
-map/pdftex.map} <./Figures/uc3m-logo.pdf>]
-No file RLC.toc.
-[2
+map/pdftex.map} <./Figures/uc3m-logo.pdf>] (./RLC.toc) [2
 
 ] [3
 
@@ -1635,7 +1638,8 @@ No file RLC.toc.
 
 ] [6
 
-] [7
+]
+[7
 
 ]
 Package epstopdf Info: Source file: <Figures/overdamped.eps>
@@ -1649,7 +1653,7 @@ erted-to.pdf Figures/overdamped.eps>
 (epstopdf)             \includegraphics on input line 193.
 Package epstopdf Info: Output file is already uptodate.
 
-<Figures/overdamped-eps-converted-to.pdf, id=218, 657.45625pt x 526.96875pt>
+<Figures/overdamped-eps-converted-to.pdf, id=241, 657.45625pt x 526.96875pt>
 File: Figures/overdamped-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Figures/overdamped-eps-converted-to.pdf>
@@ -1676,7 +1680,7 @@ verted-to.pdf Figures/underdamped.eps>
 (epstopdf)             \includegraphics on input line 267.
 Package epstopdf Info: Output file is already uptodate.
 
-<Figures/underdamped-eps-converted-to.pdf, id=329, 657.45625pt x 526.96875pt>
+<Figures/underdamped-eps-converted-to.pdf, id=352, 657.45625pt x 526.96875pt>
 File: Figures/underdamped-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Figures/underdamped-eps-converted-to.pdf>
@@ -1704,7 +1708,7 @@ ps-converted-to.pdf Figures/critically_damped.eps>
 (epstopdf)             \includegraphics on input line 328.
 Package epstopdf Info: Output file is already uptodate.
 
-<Figures/critically_damped-eps-converted-to.pdf, id=438, 657.45625pt x 526.9687
+<Figures/critically_damped-eps-converted-to.pdf, id=460, 657.45625pt x 526.9687
 5pt>
 File: Figures/critically_damped-eps-converted-to.pdf Graphic file (type pdf)
  <use Figures/critically_damped-eps-converted-to.pdf>
@@ -1713,9 +1717,7 @@ Package pdftex.def Info: Figures/critically_damped-eps-converted-to.pdf used on
 (pdftex.def)             Requested size: 262.97784pt x 210.78375pt.
  [16
 
- <./Figures/critically_damped-eps-converted-to.pdf>]
-No file RLC.toc.
-[17
+ <./Figures/critically_damped-eps-converted-to.pdf>] (./RLC.toc) [17
 
 ] [18
 
@@ -1749,9 +1751,7 @@ Overfull \hbox (4.56694pt too wide) in paragraph at lines 546--546
 
 ] [28
 
-]
-No file RLC.toc.
-[29
+] (./RLC.toc) [29
 
 ] [30
 
@@ -1797,24 +1797,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 809.
 (./RLC.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 809.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 809.
-
-
-Package rerunfilecheck Warning: File `RLC.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `RLC.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  062BEEFCF369983B900FD6C000A1C3D5;210.
+Package rerunfilecheck Info: File `RLC.out' has not changed.
+(rerunfilecheck)             Checksum: 062BEEFCF369983B900FD6C000A1C3D5;210.
  ) 
 Here is how much of TeX's memory you used:
- 43058 strings out of 492995
- 940502 string characters out of 6132704
- 1146889 words of memory out of 5000000
- 45802 multiletter control sequences out of 15000+600000
+ 43204 strings out of 492995
+ 942632 string characters out of 6132704
+ 1148628 words of memory out of 5000000
+ 45932 multiletter control sequences out of 15000+600000
  16236 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 58i,15n,63p,10358b,970s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,15n,64p,10358b,970s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 ></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
@@ -1829,10 +1822,10 @@ cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/lo
 cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/loc
 al/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
 l/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on RLC.pdf (36 pages, 334056 bytes).
+Output written on RLC.pdf (36 pages, 337643 bytes).
 PDF statistics:
- 1053 PDF objects out of 1200 (max. 8388607)
- 968 compressed objects within 10 object streams
+ 1076 PDF objects out of 1200 (max. 8388607)
+ 989 compressed objects within 10 object streams
  76 named destinations out of 1000 (max. 500000)
- 105 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 141 words of extra memory for PDF output out of 10000 (max. 10000000)
 
