@@ -72,6 +72,89 @@
 
 \section{Introduction to LTI systems}
 
+
+\frame{
+\frametitle{Motivation: Image Filtering}
+
+\begin{figure}
+\includegraphics[scale=0.3]{Filtro_1.png}
+\end{figure}
+
+}
+
+\frame{
+\frametitle{Motivation: Image Filtering}
+
+\begin{figure}
+\includegraphics[scale=1.0]{2D_1.pdf}
+\end{figure}
+
+\begin{align*}
+Y[1,1]&=X[1,1]*K[1,1]+X[1,2]*K[1,2]+X[1,3]*K[1,3]\\
+&+X[2,1]*K[2,1]+X[2,2]*K[2,2]+X[2,3]*K[2,3]\\
+&+X[3,1]*K[3,1]+X[3,2]*K[3,2]+X[3,3]*K[3,3]
+\end{align*}
+}
+
+\frame{
+\frametitle{Motivation: Image Filtering}
+
+\begin{figure}
+\includegraphics[scale=1.0]{2D_2.pdf}
+\end{figure}
+
+\begin{align*}
+Y[1,2]&=X[1,2]*K[1,1]+X[1,3]*K[1,2]+X[1,4]*K[1,3]\\
+&+X[2,2]*K[2,1]+X[2,3]*K[2,2]+X[2,4]*K[2,3]\\
+&+X[3,2]*K[3,1]+X[3,3]*K[3,2]+X[3,4]*K[3,3]
+\end{align*}
+}
+
+
+
+
+\frame{
+\frametitle{Motivation: Image Filtering}
+
+\begin{figure}
+\includegraphics[scale=1.0]{2D_1.pdf}
+\end{figure}
+
+\begin{align*}
+Y[i,j]&=\sum_{k_1=1}^{n}\sum_{k_2=1}^{n} X[k_1,k_2]K[i-k_1,j-k_2], ~~~ K[u,q]=0 \text{ para } u>3, q>3
+\end{align*}
+
+{\bf Linear operator, the result does not depend on the position of the image}
+}
+
+\frame{
+\frametitle{Motivation: Image Filtering}
+
+\begin{figure}
+\includegraphics[scale=0.3]{Filtro_1.png}
+\end{figure}
+
+}
+
+\frame{
+\frametitle{Motivation: Image Filtering}
+
+\begin{figure}
+\includegraphics[scale=0.3]{Filtro_2.png}
+\end{figure}
+
+}
+
+\frame{
+\frametitle{Motivation: Image Filtering}
+
+\begin{figure}
+\includegraphics[scale=0.3]{Filtro_3.png}
+\end{figure}
+
+}
+
+
 \frame{
 \begin{itemize}
 \item The theory of LTI systems has direct applications in a wide set of technical areas: 
@@ -127,6 +210,32 @@ ax_1[n]+bx_2[n]\rightarrow ay_1[n]+by_2[n]
 
 }
 
+
+
+\frame{
+\frametitle{Analysis of LTI systems}
+
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P6.pdf}
+\end{figure}
+
+\vspace{0.5cm}
+\begin{itemize}
+\item Decompose input signal by means of a linear combination of simpler signals
+\end{itemize}
+
+$$x(t) = \dots a_{-1} \phi_{-1} (t) + a_{-2} \phi_{0} (t) + a_{0} \phi_{0} (t) + a_{1} \phi_{1} (t) + a_{2} \phi_{2} (t) + \ldots $$
+
+\begin{itemize}
+\item These ``basic" signals are chosen to provide a certain degree of analytical convenience, so we can  analyze the system's properties and its response to arbitrary input signals:
+\begin{itemize}
+\item Delayed Impulses $\Rightarrow$ \textbf{\textcolor{darkblue}{Convolution}}
+\item Complex exponential signals $\Rightarrow$ \textbf{\textcolor{darkblue}{Fourier analysis}}
+\end{itemize}
+\end{itemize}
+
+
+}
 
 \section{Discrete-time LTI systems}
 
