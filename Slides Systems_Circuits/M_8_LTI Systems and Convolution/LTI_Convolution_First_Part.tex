@@ -241,15 +241,9 @@ $$x(t) = \dots a_{-1} \phi_{-1} (t) + a_{-2} \phi_{0} (t) + a_{0} \phi_{0} (t) +
 
 \frame{
 
-\begin{pspicture}[](5,2)
-   \pssignal(0,1){x}{$x[n]$}
-   \psblock(2,1){a}{LTI}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(4,1){y}{$y[n]$?}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P1.pdf}
+\end{figure}
 
 \vspace{0.5cm}
 Remember that any discrete-time sequence $x[n]$ can be decomposed as a linear combination of unit impulses:
@@ -266,35 +260,9 @@ x[n]&=\sum_{k=-\infty}^{\infty}x[k]\delta[n-k]\\\nn
 \textbf{If the system is linear} and we are able to compute
 \vspace{0.5cm}
 
-\begin{center}
-\begin{pspicture}[](6.5,5)
-	
-   \pssignal(0,5){x1}{$\delta[n]$}
-    \psblock(2,5){a1}{LTI}
-    \pssignal(4,5){y1}{$h_0[n]$}   
-   \pssignal(0,4){x2}{$\delta[n+1]$}
-    \psblock(2,4){a2}{LTI}
-    \pssignal(4,4){y2}{$h_{-1}[n]$}      
-     \pssignal(0,3){x3}{$\delta[n-1]$}
-    \psblock(2,3){a3}{LTI}
-    \pssignal(4,3){y3}{$h_{1}[n]$}     
-    
-    \ldotsnode[angle=90](0,2){dots}
-    \ldotsnode[angle=90](2,2){dots}
-    \ldotsnode[angle=90](4,2){dots}
-    
-    \pssignal(0,1){x4}{$\delta[n-k]$}
-    \psblock(2,1){a4}{LTI}
-    \pssignal(4,1){y4}{$h_{k}[n]$}   
-    
-   \psset{arrows=->}
-   \ncline{x1}{a1}  \ncline{a1}{y1}    
-   \ncline{x2}{a2}  \ncline{a2}{y2}  
-    \ncline{x3}{a3}  \ncline{a3}{y3} 
-     \ncline{x4}{a4}  \ncline{a4}{y4}  
-       
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P2.pdf}
+\end{figure}
 
 then we can make use of the superposition property!
 }
@@ -302,15 +270,9 @@ then we can make use of the superposition property!
 \frame{
 
 
-\begin{pspicture}[](9,2)
-   \pssignal(0,1){x}{$x[n]=\displaystyle\sum_{k=-\infty}^{\infty}x[k]\delta[n-k]$}
-   \psblock(4,1){a}{LTI}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(6,1){y}{$y[n]$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P3.pdf}
+\end{figure}
 
 \vspace{0.5cm}
 \begin{exampleblock}{}
@@ -330,35 +292,9 @@ y[n]=\sum_{k=-\infty}^{\infty}x[k]h_{k}[n]
 
 \frame{
 
-\begin{center}
-\begin{pspicture}[](8,5)
-	
-   \pssignal(0,5){x1}{$\delta[n]$}
-    \psblock(2,5){a1}{LTI}
-    \pssignal(5,5){y1}{$h_0[n]=h[n]$}   
-   \pssignal(0,4){x2}{$\delta[n+1]$}
-    \psblock(2,4){a2}{LTI}
-    \pssignal(5,4){y2}{$h_{-1}[n]=h[n+1]$}      
-     \pssignal(0,3){x3}{$\delta[n-1]$}
-    \psblock(2,3){a3}{LTI}
-    \pssignal(5,3){y3}{$h_{1}[n]=h[n-1]$}     
-    
-    \ldotsnode[angle=90](0,2){dots}
-    \ldotsnode[angle=90](2,2){dots}
-    \ldotsnode[angle=90](4,2){dots}
-    
-    \pssignal(0,1){x4}{$\delta[n-k]$}
-    \psblock(2,1){a4}{LTI}
-    \pssignal(5,1){y4}{$h_{k}[n]=h[n-k]$}   
-    
-   \psset{arrows=->}
-   \ncline{x1}{a1}  \ncline{a1}{y1}    
-   \ncline{x2}{a2}  \ncline{a2}{y2}  
-    \ncline{x3}{a3}  \ncline{a3}{y3} 
-     \ncline{x4}{a4}  \ncline{a4}{y4}  
-       
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P4.pdf}
+\end{figure}
 
 Therefore, for any input $x[n]$, if $h[n]$ is known then the system output is given by
 
@@ -376,17 +312,9 @@ y[n]=\sum_{k=-\infty}^{\infty}x[k]h_{k}[n]=\sum_{k=-\infty}^{\infty}x[k]h[n-k]
 \item $h[n]$ is the system's \textbf{impulse response}.
 \item Any LTI system is \textbf{completely defined} by $h[n]$!
 \vspace{0.3cm}
-\begin{center}
-\begin{pspicture}[](5,2)
-   \pssignal(0,1){x}{$x[n]$}
-   \psblock(2,1){a}{$h[n]$}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(4,1){y}{$y[n]$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P5.pdf}
+\end{figure}
 \end{itemize}
 
 
@@ -458,86 +386,79 @@ is the convolution operation between them.
 %
 %}
 
+%\frame{
+%\frametitle{Example}
+%
+%\psset{xunit=0.75cm,yunit=0.75cm}
+%
+%\begin{center}
+%
+%\begin{tabular}{|c|c|}
+%\hline
+%\begin{pspicture}[showgrid](-1,-1)(4,5)
+%  \rput(0,0){\psaxeslabels(0,0)(-1,0)(4,0){$n$}{}
+%     \rput[tl](-1,3){$x[n]$}
+%     \psstem[style=Stem,linecolor=blue](-1,1)
+%            {0,4,1,2,5}}
+%\end{pspicture}
+%&
+%\begin{pspicture}[showgrid](-2,-1)(3,3)
+%  \rput(0,0){\psaxeslabels(0,0)(-2,0)(3,0){$n$}{}
+%     \rput[tl](-2,3){$h[n]$}
+%     \psstem[style=Stem,linecolor=blue](-2,1)
+%            {0,1,2,-1}}
+%\end{pspicture}\\
+%\hline
+%\end{tabular}
+%
+%\end{center}
+%
+%
+%
+%}
+%
+%\frame{
+%\frametitle{Example}
+%
+%\begin{center}
+%\begin{pspicture}[](5,2)
+%   \pssignal(0,1){x}{$x[n]$}
+%   \psblock(2,1){a}{$h[n]$}
+%   %\psblock(4,1){b}{$h[n], H(z)$}
+%   \pssignal(4,1){y}{$y[n]$}
+%   %-----------------
+%   \psset{arrows=->}
+%   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
+%\end{pspicture}
+%\end{center}
+%
+%\psset{xunit=0.35cm,yunit=0.35cm}
+%
+%\begin{center}
+%
+%\begin{pspicture}[showgrid](-2,-5)(7,10)
+%  \rput(0,0){\psaxeslabels(0,0)(-2,0)(7,0){$n$}{}
+%     \rput[tl](-2,10){$y[n]$}
+%     \psstem[style=Stem,linecolor=red](-2,1)
+%            {0,4,9,0,8,8,-5,0}}
+%\end{pspicture}
+%
+%\end{center}
+%
+%}
+
 \frame{
-\frametitle{Example}
-
-\psset{xunit=0.75cm,yunit=0.75cm}
-
-\begin{center}
-
-\begin{tabular}{|c|c|}
-\hline
-\begin{pspicture}[showgrid](-1,-1)(4,5)
-  \rput(0,0){\psaxeslabels(0,0)(-1,0)(4,0){$n$}{}
-     \rput[tl](-1,3){$x[n]$}
-     \psstem[style=Stem,linecolor=blue](-1,1)
-            {0,4,1,2,5}}
-\end{pspicture}
-&
-\begin{pspicture}[showgrid](-2,-1)(3,3)
-  \rput(0,0){\psaxeslabels(0,0)(-2,0)(3,0){$n$}{}
-     \rput[tl](-2,3){$h[n]$}
-     \psstem[style=Stem,linecolor=blue](-2,1)
-            {0,1,2,-1}}
-\end{pspicture}\\
-\hline
-\end{tabular}
-
-\end{center}
-
-
-
-}
-
-\frame{
-\frametitle{Example}
-
-\begin{center}
-\begin{pspicture}[](5,2)
-   \pssignal(0,1){x}{$x[n]$}
-   \psblock(2,1){a}{$h[n]$}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(4,1){y}{$y[n]$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
-\end{center}
-
-\psset{xunit=0.35cm,yunit=0.35cm}
-
-\begin{center}
-
-\begin{pspicture}[showgrid](-2,-5)(7,10)
-  \rput(0,0){\psaxeslabels(0,0)(-2,0)(7,0){$n$}{}
-     \rput[tl](-2,10){$y[n]$}
-     \psstem[style=Stem,linecolor=red](-2,1)
-            {0,4,9,0,8,8,-5,0}}
-\end{pspicture}
-
-\end{center}
-
-}
-
-\frame{
-\frametitle{Problem 39}
+\frametitle{Problem}
 
 \begin{itemize}
 \item $x[n]=\alpha^{n}u[n]$ with $\alpha\in(0,1)$
 \item $h[n]=u[n]$
 \end{itemize}
 
-\begin{center}
-\begin{pspicture}[](5,2)
-   \pssignal(0,1){x}{$x[n]$}
-   \psblock(2,1){a}{$h[n]$}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(4,1){y}{$y[n]$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P5.pdf}
+\end{figure}
+
 
 
 
@@ -567,17 +488,9 @@ y[n]=\left\{\begin{array}{cc}
 \textbf{\color{red}{The discussion for continuous-time LTI systems is just a generalization of the discrete-time case.}}
 
 
-\begin{center}
-\begin{pspicture}[](5,2)
-   \pssignal(0,1){x}{$x(t)$}
-   \psblock(2,1){a}{LTI}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(4,1){y}{$y(t)?$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P6.pdf}
+\end{figure}
 
 \vspace{0.5cm}
 Remember that any continuous-time signal $x(t)$ can be decomposed as a linear combination of an infinite number of
@@ -605,34 +518,17 @@ x(t)=\int_{-\infty}^{\infty}x(\tau)\delta(t-\tau)d\tau
 \[
 x(t) \approx x_{\Delta}(t) = \sum_{k=-\infty}^{\infty}{x(k\Delta){\color{blue}\delta_{\Delta}(t-k\Delta)}\Delta} 
 \]
-If we are able to compute the system's output for any  $\delta_{\Delta}(t-k\Delta)$
-\begin{center}
-\begin{pspicture}[](5,2)
-   \pssignal(0,1){x}{$\delta_{\Delta}(t-k\Delta)$}
-   \psblock(2,1){a}{L}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(4,1){y}{$h_{k\Delta}(t)$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P7.pdf}
+\end{figure}
 \begin{figure}
 \centering\includegraphics[scale=0.3]{Figures/Signal33.pdf}
 \end{figure}
 
 Then applying the superposition property
-\begin{center}
-\begin{pspicture}[](7,2)
-   \pssignal(0,1){x}{$\displaystyle x_{\Delta}(t)$}
-   \psblock(1.5,1){a}{L}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(6,1){y}{$y_{\Delta}(t) = \sum_{k=-\infty}^{\infty}{x(k\Delta) {\color{blue}h_{k\Delta}(t)}\Delta}$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P8.pdf}
+\end{figure}
 }
 
 \frame{
@@ -641,22 +537,9 @@ Then applying the superposition property
 %\vspace{0.5cm}
 
 If the system is also {\bf time-invariant}:
-\begin{center}
-\begin{pspicture}[](7,2)
-   \pssignal(0,2){x}{$\delta_{\Delta}(t-k\Delta)$}
-   \psblock(2,2){a}{LTI}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(5,2){y}{$h_{k\Delta}(t) = h_0(t-k\Delta)$}
-   %-----------------
-   \pssignal(0,1){x1}{$\displaystyle x_{\Delta}(t)$}
-   \psblock(1.5,1){a1}{LTI}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(6,1){y1}{$y_{\Delta}(t) = \sum_{k=-\infty}^{\infty}{x(k\Delta) {\color{blue}h_0(t-k\Delta)}\Delta}$}
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-     \ncline{x1}{a1}  \ncline{a1}{y1}	
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P9.pdf}
+\end{figure}
 
 \vspace{0.5cm}
 
@@ -771,18 +654,9 @@ y(t) = \lim_{\Delta \rightarrow 0} y_{\Delta}(t) = \int_{-\infty}^{\infty}{x(\ta
 \begin{itemize}
 \item $h(t)$ is the \textbf{system's response to the impulse $\delta(t)$}.
 \item Any LTI system is \textbf{completely defined} by $h(t)$!
-\vspace{0.3cm}
-\begin{center}
-\begin{pspicture}[](5,2)
-   \pssignal(0,1){x}{$x(t)$}
-   \psblock(2,1){a}{$h(t)$}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(4,1){y}{$y(t)$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P10.pdf}
+\end{figure}
 \end{itemize}
 
 
@@ -826,17 +700,9 @@ If $h(t)$ is the impulse response of an LTI system,  compute the system's output
 \frame{
 \frametitle{Sol.}
 
-\begin{center}
-\begin{pspicture}[](5,2)
-   \pssignal(0,1){x}{$x(t)$}
-   \psblock(2,1){a}{$h(t)$}
-   %\psblock(4,1){b}{$h[n], H(z)$}
-   \pssignal(4,1){y}{$y(t)$}
-   %-----------------
-   \psset{arrows=->}
-   \ncline{x}{a}  \ncline{a}{y}  %\ncline{b}{y}
-\end{pspicture}
-\end{center}
+\begin{figure}
+\centering\includegraphics[scale=0.3]{P10.pdf}
+\end{figure}
 
 \begin{align*}
 y(t)=\left\{

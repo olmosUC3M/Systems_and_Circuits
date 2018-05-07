@@ -1,4 +1,4 @@
 \beamer@sectionintoc {1}{Introduction to LTI systems}{2}{0}{1}
 \beamer@sectionintoc {2}{Discrete-time LTI systems}{14}{0}{2}
-\beamer@sectionintoc {3}{Continuous-time LTI systems}{24}{0}{3}
-\beamer@sectionintoc {4}{Properties of the Convolution operation}{32}{0}{4}
+\beamer@sectionintoc {3}{Continuous-time LTI systems}{22}{0}{3}
+\beamer@sectionintoc {4}{Properties of the Convolution operation}{30}{0}{4}
