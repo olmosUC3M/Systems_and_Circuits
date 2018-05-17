@@ -373,6 +373,33 @@ u(t)=\int_{-\infty}^{\infty}u(\tau)\delta(t-\tau) d\tau=\int_{0}^{\infty}\delta(
 }
 
 \frame{
+\textbf{{\color {darkblue} We approximate} $x(t)$} by a lineal combination of delayed and scaled versions of  $\delta_{L}(t)$
+
+\begin{figure}
+\centering\includegraphics[scale=0.4]{Figures/Signal322.pdf}
+\end{figure}
+}
+
+\frame{
+\frametitle{Continuous-time Impulse. Properties (II).}
+\[
+x(t) \approx x_{L}(t) = \sum_{k=-\infty}^{\infty}{x(kL){\color{darkblue}\delta_{L}(t-kL)}L} 
+\]
+
+If we take the limit $L \rightarrow 0$:
+\begin{itemize}
+\item $kL \rightarrow \tau$
+\item $\sum \rightarrow \int$
+\item $L \rightarrow d\tau$
+\end{itemize}
+
+\begin{align}\nn
+x(t)=\int_{-\infty}^{\infty}x(\tau)\delta(t-\tau) d\tau
+\end{align}
+
+}
+
+\frame{
 \frametitle{Relationship with the rectangular pulse}
 
 \begin{figure}
